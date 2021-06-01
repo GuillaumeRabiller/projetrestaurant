@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Guillaume Rabiller" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Page mise à jour catégorie plats">
+
+    <!-- CSS + Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{/styles/css/style.css}"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto&display=swap">
+    <script src="https://kit.fontawesome.com/610665bae1.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <title>Formulaire mise à jour catégorie de plats</title>
+</head>
+
+<body class="container">
+
+    <!-- ------------------------    HEADER    ---------------------------- -->
+
+    <div th:replace="Fragments/header :: header"></div>
+
+
+    <!--  --------------------    MAIN DE LA PAGE     -------------------  -->
+
+    <div class="row">
+        <a class="btn btn-outline-secondary" th:href="@{/index}" role="button"><i class="fas fa-home"></i> Retour à l'index</a>
+    </div>
+
+
+    <br>
+    <br>
+
+
+    <div class="row">
+        <h1>Mise à jour Catégorie de plats</h1>
+
+        <form th:action="@{/updateCategoriePlat}"
+              th:object="${aCategorie}" method="POST">
+            <div class="form-group">
+                <input type="hidden" th:field="*{id}" />
+                <br/>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Nom de la catégorie</label>
+                <input class="form-control" type="text" th:field="*{nomCategorie}" th:minlength="3" th:maxlength="64" />
+                <span class="error" th:if="${#fields.hasErrors('nomCategorie')}">Erreur sur le nom</span>
+                <br/>
+            </div>
+            <div class="form-group">
+                <label class="form-label">TVA</label>
+                <input class="form-control" type="number" th:field="*{tva}" />
+                <span class="error" th:if="${#fields.hasErrors('tva')}">Erreur sur la tva</span>
+                <br/>
+            </div>
+
+            <input type="submit" value="Update Catégorie" />
+            <a class="backbutton" th:href="@{/readCategoriePlat}" role="button"><i class="fas fa-home"></i> Retour </a>
+        </form>
+    </div>
+
+    <br>
+    <br>
+
+
+    <!-- ------------------------    FOOTER    ---------------------------- -->
+
+    <div th:replace="Fragments/footer :: footer"></div>
+
+
+
+</body>
+</html>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="author" content="Guillaume Rabiller" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Page index pour l'application TPR - Traçage Produits Restaurant">
+    <meta name="description" content="Page index pour l'application de Gestion de Restaurant">
 
     <!-- CSS + Bootstrap CSS -->
     <link rel="stylesheet" th:href="@{/styles/css/style.css}"/>
@@ -12,7 +12,7 @@
     <script src="https://kit.fontawesome.com/610665bae1.js" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 
-    <title>Projet NFA036 - Tracer restaurant</title>
+    <title>Projet NFA019- Gestion restaurant</title>
 
 
 </head>
@@ -41,6 +41,17 @@
         </div>
         <div class="col">
             <a class="btnmenu btn-outline-secondary btn-lg" th:href="@{/readFrigo}" role="button"><i class="fas fa-boxes"></i>   Gestion des Frigos</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <a class="btnmenu btn-outline-secondary btn-lg" th:href="@{/readCategoriePlat}" role="button"><i class="fas fa-folder"></i>   Gestion des Catégories de Plat</a>
+        </div>
+        <div class="col">
+            <a class="btnmenu btn-outline-secondary btn-lg" th:href="@{/readPlat}" role="button"><i class="fas fa-carrot"></i>   Gestion des Plats</a>
+        </div>
+        <div class="col">
+            <a class="btnmenu btn-outline-secondary btn-lg" th:href="@{/readTable}" role="button"><i class="fas fa-boxes"></i>   Gestion des Tables</a>
         </div>
     </div>
 
