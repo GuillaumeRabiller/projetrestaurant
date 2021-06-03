@@ -24,12 +24,14 @@ public class Note {
     @JoinColumn(name="ID_TABLE")
     private Table table;
 
-    @ManyToOne
-    @JoinColumn(name="ID_UTILISATEUR")
-    private Utilisateur serveur ;
+    @Column(name="SERVEUR")
+    private String serveur ;
 
     @ManyToMany(mappedBy = "notes", fetch = FetchType.LAZY)
     private List<Plat> plats;
+
+    @Column(name="NOTE_REGLEE")
+    private boolean reglement ;
 
 
     //CONSTRUCTEUR
@@ -71,13 +73,9 @@ public class Note {
         this.table = table;
     }
 
-    public Utilisateur getServeur() {
-        return serveur;
-    }
+    public String getServeur() { return serveur; }
 
-    public void setServeur(Utilisateur serveur) {
-        this.serveur = serveur;
-    }
+    public void setServeur(String serveur) { this.serveur = serveur; }
 
     public List<Plat> getPlats() {
         return plats;
@@ -85,5 +83,17 @@ public class Note {
 
     public void addPlats(Plat plat) {
         plats.add(plat);
+    }
+
+    public boolean isReglement() { return reglement; }
+
+    public void setReglement(boolean reglement) { this.reglement = reglement; }
+
+
+    //METHODES
+
+    public void changeTable(Table newTable){
+        this.getTable().deleteNote(this);
+        newTable.addNotes(this);
     }
 }

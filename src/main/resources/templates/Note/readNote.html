@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="Guillaume Rabiller" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Page affichage des Notes en cours">
+
+  <!-- CSS + Bootstrap CSS -->
+  <link rel="stylesheet" th:href="@{/styles/css/style.css}"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto&display=swap">
+  <script src="https://kit.fontawesome.com/610665bae1.js" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+  <title>Liste des notes en cours</title>
+</head>
+
+<body class="container">
+
+<!-- ------------------------    HEADER    ---------------------------- -->
+
+<div th:replace="Fragments/header :: header"></div>
+
+<!--  --------------------    MAIN DE LA PAGE     -------------------  -->
+
+<div class="row">
+  <a class="btn btn-outline-secondary" th:href="@{/index}" role="button"><i class="fas fa-home"></i> Retour à l'index</a>
+</div>
+
+
+<br>
+<br>
+
+
+<h1>Liste des Commandes en cours</h1>
+<div class="row" style="width: 95% ; padding-left: 40px ">
+  <table border="1" class="table table-striped table-hover table-sm">
+    <tr>
+      <th>Table</th>
+      <th>Description</th>
+      <th>Couverts</th>
+      <th>Plats</th>
+      <th>Facturer</th>
+      <th>Maj</th>
+    </tr>
+    <tr th:each="note:${notes}">
+      <td th:text="${note.noTable}"></td>
+      <td th:text="${note.description}"></td>
+      <td th:text="${note.couvert}"></td>
+      <td><a th:href="@{/listePlatNote/{id}(id=${note.idNote})}"><i class="far fa-edit"></i></a></td>
+      <td><a th:href="@{/factureNote/{id}(id=${note.idNote})}"><i class="far fa-edit"></i></a></td>
+      <td><a th:href="@{/updateNote/{id}(id=${note.idNote})}"><i class="far fa-edit"></i></a></td>
+    </tr>
+  </table>
+</div>
+
+
+
+<br>
+<br>
+
+
+
+
+
+</body>
+</html>

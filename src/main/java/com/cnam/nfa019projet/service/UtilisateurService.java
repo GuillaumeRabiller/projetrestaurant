@@ -17,6 +17,7 @@ public class UtilisateurService {
     @Autowired
     private UtilisateurRepository utilisateurRepository ;
 
+
     /*
      *Méthode pour récupérer le nom + prénom de l'Utilisateur connecté
      *
@@ -27,6 +28,22 @@ public class UtilisateurService {
 
         if (principal instanceof UtilisateurDetails) {
             return ((UtilisateurDetails)principal).getNomPrenom();
+        } else {
+            return principal.toString();
+        }
+    }
+
+
+    /*
+     *Méthode pour récupérer le rôle de l'Utilisateur connecté
+     *
+     */
+
+    public String getRoleUser(){
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if (principal instanceof UtilisateurDetails) {
+            return ((UtilisateurDetails)principal).getRole().toString();
         } else {
             return principal.toString();
         }

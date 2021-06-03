@@ -34,18 +34,18 @@
     <div class="row" style="width: 95% ; padding-left: 40px ">
         <table border="1" class="table table-striped table-hover table-sm">
             <tr>
-                <th>id</th>
+                <th sec:authorize="hasRole('ADMIN')">id</th>
                 <th>Numéro de la table</th>
                 <th>Description</th>
-                <th>Editer</th>
-                <th>Supprimer</th>
+                <th sec:authorize="hasRole('ADMIN')">Editer</th>
+                <th sec:authorize="hasRole('ADMIN')">Supprimer</th>
             </tr>
             <tr th:each="table:${tableList}">
-                <td th:text="${table.id}"></td>
+                <td sec:authorize="hasRole('ADMIN')" th:text="${table.id}"></td>
                 <td th:text="${table.noTable}"></td>
                 <td th:text="${table.description}"></td>
-                <td><a th:href="@{/updateTable/{id}(id=${table.id})}"><i class="far fa-edit"></i></a></td>
-                <td><a th:href="@{/verifDeleteTable/{id}(id=${table.id})}"><i class="far fa-trash-alt"></i></a></td>
+                <td sec:authorize="hasRole('ADMIN')"><a th:href="@{/updateTable/{id}(id=${table.id})}"><i class="far fa-edit"></i></a></td>
+                <td sec:authorize="hasRole('ADMIN')"><a th:href="@{/verifDeleteTable/{id}(id=${table.id})}"><i class="far fa-trash-alt"></i></a></td>
             </tr>
         </table>
     </div>

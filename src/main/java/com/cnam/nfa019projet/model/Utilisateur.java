@@ -40,8 +40,6 @@ public class Utilisateur {
     @Enumerated(EnumType.STRING)
     private RoleUtilisateur role ;
 
-    @OneToMany(mappedBy = "serveur")
-    private List<Note> notes ;
 
     //CONSTRUCTEURS
 
@@ -96,14 +94,6 @@ public class Utilisateur {
 
     public void setRole(RoleUtilisateur role) { this.role = role; }
 
-    public List<Note> getNotes() {
-        return notes;
-    }
-
-    public void addNotes(Note note) {
-        note.setServeur(this);
-        notes.add(note) ;
-    }
 
     //REDEFINITION TOSTRING
 

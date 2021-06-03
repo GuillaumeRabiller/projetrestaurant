@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Guillaume Rabiller" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Page mise à jour Note">
+
+    <!-- CSS + Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{/styles/css/style.css}"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto&display=swap">
+    <script src="https://kit.fontawesome.com/610665bae1.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <title>Formulaire mise à jour note</title>
+</head>
+
+<body class="container">
+
+<!-- ------------------------    HEADER    ---------------------------- -->
+
+<div th:replace="Fragments/header :: header"></div>
+
+<!--  --------------------    MAIN DE LA PAGE     -------------------  -->
+
+
+<div class="row">
+    <a class="btn btn-outline-secondary" th:href="@{/index}" role="button"><i class="fas fa-home"></i> Retour à l'index</a>
+</div>
+
+
+<br>
+<br>
+
+
+<div class="row">
+    <h1>Mise à jour d'une Note</h1>
+
+    <form th:action="@{/updateNote}"
+          th:object="${note}" method="POST">
+        <div class="form-group">
+            <input type="hidden" th:field="*{id}" />
+            <span class="error" th:if="${#fields.hasErrors('id')}">Erreur sur l'id</span>
+            <br>
+        </div>
+        <div class="form-group">
+            <label class="form-label">Nb de couverts</label>
+            <input class="form-control" type="number" th:field="*{nbCouvert}" th:required/>
+            <span class="error" th:if="${#fields.hasErrors('nbCouvert')}">Erreur sur le nb de couverts</span>
+            <br>
+        </div>
+        <div class="form-group">
+            <label class="form-label">Table</label>
+            <select name="tableId" class="form-select" >
+                <option th:each="table : *{tables}"
+                        th:value="${table.id}"
+                        th:attr="table=${table.id}, showselected=(${table.id} == lastselected)"
+                        th:selected="(${table.id == lastselected})"
+                        th:text="${table.noTable} + ' ' + ${table.description}"></option>
+            </select>
+            <br>
+        </div>
+
+        <input type="submit" value="Update note" />
+        <a class="backbutton" th:href="@{/readNote}" role="button"><i class="fas fa-home"></i> Retour </a>
+    </form>
+</div>
+
+
+<br>
+<br>
+
+
+
+
+
+</body>
+</html>

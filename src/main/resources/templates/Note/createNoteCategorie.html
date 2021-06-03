@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="Guillaume Rabiller" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Page formulaire création Commande">
+
+  <!-- CSS + Bootstrap CSS -->
+  <link rel="stylesheet" th:href="@{/styles/css/style.css}"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto&display=swap">
+  <script src="https://kit.fontawesome.com/610665bae1.js" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+  <title>Formulaire création de Commande - Ajout d'un Plat - Choix Catégorie</title>
+</head>
+
+<body class="container">
+
+<!-- ------------------------    HEADER    ---------------------------- -->
+
+<div th:replace="Fragments/header :: header"></div>
+
+<!--  --------------------    MAIN DE LA PAGE     -------------------  -->
+
+
+<br>
+<br>
+
+
+<div class="row">
+  <h1>Ajout d'un Plat</h1>
+  <br>
+  <h3>Choix Catégorie</h3>
+
+  <table border="1" class="table table-striped table-hover table-sm">
+    <tr th:each="categorie:${categories}"  style="cursor:pointer" th:some-field="${categorie.id}" onclick="rowClicked(this.getAttribute('some-field'))">
+      <td th:text="${categorie.nomCategorie}"></td>
+    </tr>
+  </table>
+</div>
+<br>
+<a class="backbutton" th:href="@{/index}" role="button"><i class="fas fa-home"></i> Retour </a>
+
+
+<script th:inline="javascript">
+  function rowClicked(id) {
+    var note = [[${note}]];
+    location.href = "/createNotePlat/" + id + "&" + note ;
+  }
+</script>
+
+
+
+</body>
+</html>

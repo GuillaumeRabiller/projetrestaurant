@@ -24,7 +24,7 @@ import java.util.List;
 @Controller
 public class StockController {
 
-    //Création d'un StockRepository
+    //Instanciation des Repository et Services
 
     @Autowired
     private StockRepository stockRepository ;

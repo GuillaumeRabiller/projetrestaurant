@@ -54,4 +54,6 @@ public class UtilisateurDetails implements UserDetails {
     public String getNomPrenom(){
        return user.getNom() + " " + user.getPrenom();
     }
+
+    public RoleUtilisateur getRole() { return user.getRole();}
 }

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="author" content="Guillaume Rabiller" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Page formulaire création Commande">
+
+  <!-- CSS + Bootstrap CSS -->
+  <link rel="stylesheet" th:href="@{/styles/css/style.css}"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto&display=swap">
+  <script src="https://kit.fontawesome.com/610665bae1.js" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+  <title>Formulaire création de Commande</title>
+</head>
+
+<body class="container">
+
+<!-- ------------------------    HEADER    ---------------------------- -->
+
+<div th:replace="Fragments/header :: header"></div>
+
+<!--  --------------------    MAIN DE LA PAGE     -------------------  -->
+
+
+<br>
+<br>
+
+
+<div class="row">
+  <h1>Nouvelle commande</h1>
+  <br>
+
+
+  <form th:action="@{/saveNote}"
+        th:object="${aNote}" method="POST">
+    <div class="form-group">
+      <label class="form-label">Table :</label>
+      <select th:field="*{tableId}" class="form-select" th:required>
+        <option th:each="table : ${tables}"
+                th:value="${table.id}"
+                th:text="${table.description}"/>
+      </select>
+      <br>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Nombre de couverts :</label>
+      <input class="form-control" type="number" th:field="*{couvert}" />
+      <span class="error" th:if="${#fields.hasErrors('couvert')}" th:errors="*{couvert}"></span>
+      <br>
+    </div>
+
+    <input type="submit" value="Submit" />
+    <input type="reset" value="Reset" />
+    <a class="backbutton" th:href="@{/index}" role="button"><i class="fas fa-home"></i> Annuler </a>
+  </form>
+
+</div>
+<br>
+
+
+
+
+</body>
+</html>

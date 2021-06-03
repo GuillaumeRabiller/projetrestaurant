@@ -45,9 +45,21 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception{
         http.authorizeRequests()
-                    .antMatchers("/updateUtil/**", "/createUtil", "/deleteUtil/**", "/readHistoriqueStock",
-                            "/createStatut", "/updateStatut", "/updateProduit","/deleteProduit", "/createProduit", "/updateCategorie/*", "/createCategorie","/deleteCategorie","/createFrigo","/updateFrigo","/deleteFrigo").hasRole("ADMIN")
-                    .antMatchers("/", "/index","/about","/readUtil", "/readStock", "/readStatut", "/readProduit", "/readCategorie", "/updateStock","/chooseProduct", "/createStock", "/createTemp","/readFrigo").hasAnyRole("ADMIN", "UTILISATEUR")
+                    .antMatchers("/indexAdmin","/readUtil","/updateUtil/**", "/createUtil", "/deleteUtil/**",
+                            "/readHistoriqueStock",
+                            "/readStatut", "/createStatut", "/updateStatut",
+                            "/updateProduit/**","/deleteProduit", "/createProduit",
+                            "/readCategorie", "/updateCategorie/*", "/createCategorie","/deleteCategorie",
+                            "/createFrigo","/updateFrigo/**","/deleteFrigo",
+                            "/readCategoriePlat", "createCategoriePlat", "updateCategoriePlat/**", "deleteCategoriePlat",
+                            "readPlat", "createPlat", "updatePlat/**", "deletePlat",
+                            "createTable", "updateTable/**", "deleteTable").hasRole("ADMIN")
+                    .antMatchers("/indexUtil", "/createTemp").hasRole("UTILISATEUR")
+                    .antMatchers("/indexServeur", "createNote", "createNoteCategorie", "createNotePlat", "readNote","listePlatNote", "updateNote", "factureNote").hasRole("SERVEUR")
+                    .antMatchers( "/readStock", "/readProduit",
+                            "/updateStock","/chooseProduct", "/createStock", "/readFrigo", "/historiqueFrigo").hasAnyRole("ADMIN", "UTILISATEUR")
+                    .antMatchers("/readTable").hasAnyRole("SERVEUR", "ADMIN")
+                    .antMatchers("/", "/index", "/about").hasAnyRole("ADMIN","UTILISATEUR","SERVEUR")
                     .antMatchers( "/login", "/styles/**", "/pics/**", "/error", "/bdd/**").permitAll()
                     .anyRequest().authenticated()
                     .and()

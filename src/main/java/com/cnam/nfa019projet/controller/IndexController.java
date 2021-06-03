@@ -4,6 +4,7 @@ import com.cnam.nfa019projet.repository.FrigoRepository;
 import com.cnam.nfa019projet.service.FrigoService;
 import com.cnam.nfa019projet.service.StockService;
 import com.cnam.nfa019projet.form.CreateTemp;
+import com.cnam.nfa019projet.service.UtilisateurService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +23,9 @@ public class IndexController {
     @Autowired
     private FrigoRepository frigoRepository;
 
+    @Autowired
+    private UtilisateurService utilisateurService ;
+
 
     /**
      * SPRING SECURITY
@@ -37,7 +41,7 @@ public class IndexController {
 
 
     /**
-     * PAGE INDEX AVEC TABLEAU DE BORD
+     * PAGE INDEX AVEC REDIRECTION EN FONCTION DU RÔLE UTILISATEUR
      *
      * READ
      *
@@ -46,6 +50,26 @@ public class IndexController {
 
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String home(Model model) {
+        String roleUtilisateur = utilisateurService.getRoleUser();
+        switch (roleUtilisateur) {
+            case "ROLE_ADMIN" : return "redirect:indexAdmin" ;
+            case "ROLE_UTILISATEUR" : return "redirect:indexUtil" ;
+            case "ROLE_SERVEUR" : return "redirect:indexServeur" ;
+            default : return "redirect:login" ;
+        }
+    }
+
+
+    /**
+     * PAGE INDEX ADMINISTRATEUR AVEC TABLEAU DE BORD
+     *
+     * READ
+     *
+     *
+     */
+
+    @RequestMapping(value = { "/indexAdmin"}, method = RequestMethod.GET)
+    public String homeAdmin(Model model) {
         model.addAttribute("stockList", stockService.listeStock());
         model.addAttribute("tempList", frigoService.lastTempList());
 
@@ -54,8 +78,47 @@ public class IndexController {
         aTemp.setFrigoList(frigoRepository.findAll());
         model.addAttribute("aTemp", aTemp);
 
-        return "/index";
+        return "/indexAdmin";
     }
+
+
+    /**
+     * PAGE INDEX UTILISATEUR AVEC TABLEAU DE BORD
+     *
+     * READ
+     *
+     *
+     */
+
+    @RequestMapping(value = {"/indexUtil"}, method = RequestMethod.GET)
+    public String homeUtil(Model model) {
+        model.addAttribute("stockList", stockService.listeStock());
+        model.addAttribute("tempList", frigoService.lastTempList());
+
+        //Gestion du popup renseignement temp
+        CreateTemp aTemp = new CreateTemp();
+        aTemp.setFrigoList(frigoRepository.findAll());
+        model.addAttribute("aTemp", aTemp);
+
+        return "/indexUtil";
+    }
+
+
+    /**
+     * PAGE INDEX SERVEUR
+     *
+     * READ
+     *
+     *
+     */
+
+    @RequestMapping(value = { "/indexServeur"}, method = RequestMethod.GET)
+    public String homeServeur(Model model) {
+
+
+        return "/indexServeur";
+    }
+
 
     @RequestMapping(value = {"/about"}, method = RequestMethod.GET)
     public String about() {
