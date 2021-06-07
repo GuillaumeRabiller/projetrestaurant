@@ -2,6 +2,7 @@ package com.cnam.nfa019projet.controller;
 
 import com.cnam.nfa019projet.form.CreateNote;
 import com.cnam.nfa019projet.form.ShowNote;
+import com.cnam.nfa019projet.form.ShowPlatNote;
 import com.cnam.nfa019projet.form.UpdateNoteForm;
 import com.cnam.nfa019projet.model.*;
 import com.cnam.nfa019projet.repository.CategoriePlatRepository;
@@ -15,11 +16,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
-
+import org.springframework.web.servlet.view.RedirectView;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
+
 
 @Controller
 public class NoteController {
@@ -193,7 +194,7 @@ public class NoteController {
     public String listePlatNote(@PathVariable("id") long idNote, Model model){
         Note aNote = noteRepository.findById(idNote).orElseThrow(() -> new IllegalArgumentException("Invalid note Id:" + idNote));
         if(aNote != null){
-            List<Plat> platList = aNote.getPlats();
+            List<ShowPlatNote> platList = noteService.envoiListePlat(idNote);
             model.addAttribute("plats", platList);
             model.addAttribute("idNote", idNote);
             model.addAttribute("noTable", aNote.getTable().getNoTable());
@@ -237,6 +238,82 @@ public class NoteController {
         return "redirect:readNote";
     }
 
+    /**
+     * AJOUT DE +1 PLAT EXISTANT SUR UNE NOTE
+     *
+     *
+     *
+     */
 
+    @RequestMapping(value = {"/ajoutPlat/{idNote}/{idPlat}"}, method = RequestMethod.GET)
+    public RedirectView ajoutPlat(@PathVariable("idNote") long idNote, RedirectView redirectView, @PathVariable("idPlat") long idPlat) {
+        Plat aPlat = platRepository.findById(idPlat).orElseThrow(() -> new IllegalArgumentException("Invalid plat Id:" + idPlat));
+        Note aNote = noteRepository.findById(idNote).orElseThrow(() -> new IllegalArgumentException("Invalid note Id:" + idNote));
+        if(aPlat != null && aNote != null) {
+            aPlat.addNotes(aNote);
+            platRepository.save(aPlat);
+            noteRepository.save(aNote);
+
+            //on renvoie à la liste des plats de notre note
+            redirectView.setContextRelative(true);
+            redirectView.setUrl("/listePlatNote/"+idNote);
+            return redirectView ;
+        } else {
+            redirectView.setContextRelative(false);
+            redirectView.setUrl("/error");
+            return redirectView;
+        }
+
+    }
+
+    /**
+     * RETRAIT DE -1 PLAT EXISTANT SUR UNE NOTE
+     *
+     *
+     *
+     */
+
+    @RequestMapping(value = {"/retraitPlat/{idNote}/{idPlat}"}, method = RequestMethod.GET)
+    public RedirectView retraitPlat(@PathVariable("idNote") long idNote, RedirectView redirectView, @PathVariable("idPlat") long idPlat) {
+        Plat aPlat = platRepository.findById(idPlat).orElseThrow(() -> new IllegalArgumentException("Invalid plat Id:" + idPlat));
+        Note aNote = noteRepository.findById(idNote).orElseThrow(() -> new IllegalArgumentException("Invalid note Id:" + idNote));
+        if(aPlat != null && aNote != null) {
+            aPlat.deleteNote(aNote);
+            platRepository.save(aPlat);
+            noteRepository.save(aNote);
+
+            //on renvoie à la liste des plats de notre note
+            redirectView.setContextRelative(true);
+            redirectView.setUrl("/listePlatNote/"+idNote);
+            return redirectView ;
+        } else {
+            redirectView.setContextRelative(false);
+            redirectView.setUrl("/error");
+            return redirectView;
+        }
+
+    }
+
+
+    /**
+     * FACTURATION D'UNE NOTE
+     *
+     *
+     *
+     */
+
+    @RequestMapping(value = {"/factureNote/{id}"}, method = RequestMethod.GET)
+    public String factureNote(@PathVariable("id") long idNote, Model model){
+        Note note = noteRepository.findById(idNote).orElseThrow(() -> new IllegalArgumentException("Invalid note Id:" + idNote));
+        List<Table> tableList = tableRepository.findAll();
+        UpdateNoteForm aNote = new UpdateNoteForm(note.getId(), note.getCouvert(), tableList);
+        if(aNote != null){
+            model.addAttribute("note", aNote);
+            model.addAttribute("lastselected", note.getTable().getId());
+            return "/Note/factureNote";
+        } else {
+            return "/error";
+        }
+    }
 
 }

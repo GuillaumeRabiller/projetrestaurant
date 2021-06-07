@@ -85,6 +85,8 @@ public class Note {
         plats.add(plat);
     }
 
+    public void deletePlats(Plat plat) { plats.remove(plat); }
+
     public boolean isReglement() { return reglement; }
 
     public void setReglement(boolean reglement) { this.reglement = reglement; }

@@ -12,55 +12,8 @@ public class Constantes {
 
     public final static String CONSOMME = "Consommé" ;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     public final static String MY_EMAIL = "g.rabiller44@gmail.com" ;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public final static String MY_PASSWORD = "papier drap balcon lampe" ;
+    public final static String MY_PASSWORD = "" ;
 
 }

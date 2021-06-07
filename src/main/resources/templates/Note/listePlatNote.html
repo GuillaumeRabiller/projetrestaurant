@@ -40,16 +40,22 @@
       <th>Description</th>
       <th>Prix</th>
       <th>Quantité</th>
-      <th>Supprimer</th>
+      <th>Ajouter</th>
+      <th>Retirer</th>
     </tr>
     <tr th:each="plat:${plats}">
-      <td th:text="${plat.getCategorie().getNomCategorie()}"></td>
+      <td th:text="${plat.nomCategorie}"></td>
       <td th:text="${plat.description}"></td>
       <td th:text="${plat.prix}"></td>
-      <td><a th:href="@{//{id}(id=${idNote})}"><i class="far fa-edit"></i></a></td>
-      <td><a th:href="@{//{id}(id=${idNote})}"><i class="far fa-edit"></i></a></td>
+      <td th:text="${plat.quantite}"></td>
+      <td><a th:href="@{/ajoutPlat/{idNote}/{idPlat}(idNote=${idNote}, idPlat=${plat.idPlat})}"><i class="far fa-edit"></i></a></td>
+      <td><a th:href="@{/retraitPlat/{idNote}/{idPlat}(idNote=${idNote}, idPlat=${plat.idPlat})}"><i class="far fa-edit"></i></a></td>
     </tr>
   </table>
+</div>
+
+<div>
+  <a class="btn btn-outline-primary" th:href="@{/createNoteCategorie/{id}(id=${idNote})}" role="button"><i class="fas fa-plus"></i> Ajout d'un Plat</a>
 </div>
 
 

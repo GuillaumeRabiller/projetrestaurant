@@ -11,30 +11,30 @@ public class Plat {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="ID_PLAT")
-    private long id ;
+    @Column(name = "ID_PLAT")
+    private long id;
 
-    @Column(nullable = false, name="DECR_PLAT")
-    @Size(min=2, max=64)
-    private String description ;
+    @Column(nullable = false, name = "DECR_PLAT")
+    @Size(min = 2, max = 64)
+    private String description;
 
-    @Column(nullable = false, name="PRIX_PLAT")
-    private float prix ;
+    @Column(nullable = false, name = "PRIX_PLAT")
+    private float prix;
 
     @ManyToOne
-    @JoinColumn(name="ID_CATEGORIE")
-    private CategoriePlat categorie ;
+    @JoinColumn(name = "ID_CATEGORIE")
+    private CategoriePlat categorie;
 
     @Transient
-    private String categorieId ;
+    private String categorieId;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    @JoinTable(name="PLAT_NOTE",
+    @JoinTable(name = "PLAT_NOTE",
             joinColumns = {
-                @JoinColumn(name="ID_PLAT", referencedColumnName = "ID_PLAT", nullable = false, updatable = false)},
+                    @JoinColumn(name = "ID_PLAT", referencedColumnName = "ID_PLAT", nullable = false, updatable = false)},
             inverseJoinColumns = {
-                @JoinColumn(name="ID_NOTE", referencedColumnName = "ID_NOTE", nullable = false, updatable = false)})
-    private List<Note> notes ;
+                    @JoinColumn(name = "ID_NOTE", referencedColumnName = "ID_NOTE", nullable = false, updatable = false)})
+    private List<Note> notes;
 
     //CONSTRUCTEUR
 
@@ -89,7 +89,12 @@ public class Plat {
 
     public void addNotes(Note note) {
         note.addPlats(this);
-        notes.add(note) ;
+        notes.add(note);
+    }
+
+    public void deleteNote(Note note) {
+        note.deletePlats(this);
+        notes.remove(note);
     }
 
 
@@ -100,8 +105,4 @@ public class Plat {
         newCategorie.addPlats(this);
     }
 
-
-    public void deleteNote(Note note) {
-        notes.remove(note);
-    }
 }
