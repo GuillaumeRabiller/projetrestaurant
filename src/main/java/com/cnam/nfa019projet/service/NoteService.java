@@ -1,5 +1,7 @@
 package com.cnam.nfa019projet.service;
 
+import com.cnam.nfa019projet.form.FactureNote;
+import com.cnam.nfa019projet.form.ListePlatFacture;
 import com.cnam.nfa019projet.form.ShowPlatNote;
 import com.cnam.nfa019projet.form.UpdateNoteForm;
 import com.cnam.nfa019projet.model.Note;
@@ -26,6 +28,9 @@ public class NoteService {
 
     @Autowired
     PlatRepository platRepository;
+
+    @Autowired
+    UtilisateurService utilisateurService ;
 
 
     public Note changeNote(UpdateNoteForm aNote){
@@ -77,6 +82,57 @@ public class NoteService {
             aPlat.setPrix(plat.getPrix());
             aPlat.setQuantite(platNote.get(key));
             aPlat.setIdPlat(key);
+            listePlat.add(aPlat);
+        }
+        return listePlat;
+    }
+
+
+    //Méthode pour remplir le form FactureNote pour l'édition d'une facture
+
+    public FactureNote facturer(Note aNote){
+        FactureNote facture = new FactureNote();
+        facture.setNoTable(aNote.getTable().getNoTable());
+        facture.setNbCouvert(aNote.getCouvert());
+        facture.setServeur(utilisateurService.getNomUser());
+        facture.setPlats(listePlat(aNote));
+        facture.setIdNote(aNote.getId());
+
+        //Récupération de la somme TTC, et différentes valeurs de TVA
+        float sommeTTC = 0f, sommeHT = 0f, TVA10 = 0f, TVA20 = 0f ;
+        for (ListePlatFacture plat : facture.getPlats()) {
+            sommeTTC = sommeTTC + plat.getPrix();
+            if (plat.getTva() == 10) {          //plat avec TVA à 10%
+                TVA10 = TVA10 + ( plat.getPrix() * plat.getTva() / 100) ;
+            } else {       //plat avec TVA à 20%
+                TVA20 = TVA20 + ( plat.getPrix() * plat.getTva() / 100) ;
+            }
+        }
+        //on renseigne la sommeHT
+        sommeHT = sommeTTC - TVA10 - TVA20 ;
+
+        facture.setSommeTTC(sommeTTC);
+        facture.setSommeHT(sommeHT);
+        facture.setTVA10(TVA10);
+        facture.setTVA20(TVA20);
+
+        return facture ;
+    }
+
+
+    //Méthode pour renseigner le form ListePlatFacture (utilisé pour remplir le form FactureNote)
+
+    public List<ListePlatFacture> listePlat(Note aNote){
+        Map<Long, Integer> platNote = triPlat(aNote.getId());
+        List<ListePlatFacture> listePlat = new ArrayList<>();
+        for (Long key : platNote.keySet()){
+            Plat plat = platRepository.findById(key).orElseThrow(() -> new IllegalArgumentException("Invalid plat id"));
+            ListePlatFacture aPlat = new ListePlatFacture();
+            aPlat.setDescription(plat.getDescription());
+            aPlat.setQuantite(platNote.get(key));
+            aPlat.setTva(plat.getCategorie().getTva());
+            //On multiplie le prix d'un plat par sa qté qui vient juste d'être renseignée
+            aPlat.setPrix(plat.getPrix()*aPlat.getQuantite());
             listePlat.add(aPlat);
         }
         return listePlat;

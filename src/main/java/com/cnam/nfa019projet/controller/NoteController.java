@@ -1,9 +1,6 @@
 package com.cnam.nfa019projet.controller;
 
-import com.cnam.nfa019projet.form.CreateNote;
-import com.cnam.nfa019projet.form.ShowNote;
-import com.cnam.nfa019projet.form.ShowPlatNote;
-import com.cnam.nfa019projet.form.UpdateNoteForm;
+import com.cnam.nfa019projet.form.*;
 import com.cnam.nfa019projet.model.*;
 import com.cnam.nfa019projet.repository.CategoriePlatRepository;
 import com.cnam.nfa019projet.repository.NoteRepository;
@@ -304,16 +301,35 @@ public class NoteController {
 
     @RequestMapping(value = {"/factureNote/{id}"}, method = RequestMethod.GET)
     public String factureNote(@PathVariable("id") long idNote, Model model){
-        Note note = noteRepository.findById(idNote).orElseThrow(() -> new IllegalArgumentException("Invalid note Id:" + idNote));
-        List<Table> tableList = tableRepository.findAll();
-        UpdateNoteForm aNote = new UpdateNoteForm(note.getId(), note.getCouvert(), tableList);
+        Note aNote = noteRepository.findById(idNote).orElseThrow(() -> new IllegalArgumentException("Invalid note Id:" + idNote));
         if(aNote != null){
-            model.addAttribute("note", aNote);
-            model.addAttribute("lastselected", note.getTable().getId());
+            FactureNote facture = noteService.facturer(aNote) ;
+            model.addAttribute("facture", facture);
             return "/Note/factureNote";
         } else {
             return "/error";
         }
     }
+
+    /**
+     * VALIDATION DE LA FACTURATION
+     *
+     * ON SORT LE PDF DE LA FACTURE + ON PASSE LA VARIABLE REGLEMENT DE NOTE SUR TRUE POUR QUE LA NOTE SOIT RETIREE DE LA LISTE DES EN-COURS
+     *
+     */
+
+    @RequestMapping(value = {"/factureValidNote/{id}"}, method = RequestMethod.GET)
+    public String factureValidNote(@PathVariable("id") long idNote, Model model){
+        Note aNote = noteRepository.findById(idNote).orElseThrow(() -> new IllegalArgumentException("Invalid note Id:" + idNote));
+        if(aNote != null){
+            aNote.setReglement(true);
+            noteRepository.save(aNote);
+
+            return "/indexServeur";
+        } else {
+            return "/error";
+        }
+    }
+
 
 }

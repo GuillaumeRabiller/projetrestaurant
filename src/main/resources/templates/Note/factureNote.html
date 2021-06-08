@@ -1,10 +1,114 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="author" content="Guillaume Rabiller" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Page affichage Facture d'une note">
+
+    <!-- CSS + Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{/styles/css/style.css}"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto&display=swap">
+    <script src="https://kit.fontawesome.com/610665bae1.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <title>Affichage facture d'une note</title>
 </head>
-<body>
+
+<body class="container">
+
+<!-- ------------------------    HEADER    ---------------------------- -->
+
+<div th:replace="Fragments/header :: header"></div>
+
+<!--  --------------------    MAIN DE LA PAGE     -------------------  -->
+
+<div class="row">
+    <a class="btn btn-outline-secondary" th:href="@{/index}" role="button"><i class="fas fa-home"></i> Retour à l'index</a>
+</div>
+
+
+<br>
+<br>
+
+<div class="row">
+    <div>
+        LE RESTAURANT DU PORT
+    </div>
+    <div>
+        CUISINE AUDACIEUSE GASTRONOMIQUE
+    </div>
+    <div>
+        3 RUE DU PORT LAVIGNE
+    </div>
+    <div>
+        44000 NANTES - TEL. 02 00 00 00 00
+    </div>
+</div>
+
+<br>
+
+<div>
+    TABLE <span th:text="${facture.noTable}"></span>
+</div>
+<div>
+    <span th:text="${facture.nbCouvert}"></span> COUVERTS - <span th:text="${facture.serveur}"></span>
+</div>
+
+<br>
+
+<div class="row" style="width: 95% ; padding-left: 40px ">
+    <table border="1" class="table table-striped table-hover table-sm">
+        <tr th:each="plat:${facture.plats}">
+            <td th:text="${plat.quantite}"></td>
+            <td th:text="${plat.description}"></td>
+            <td th:text="${plat.prix}"></td>
+        </tr>
+    </table>
+</div>
+
+<br>
+
+<div>
+    TOTAL <span th:text="${facture.sommeTTC}"></span>
+</div>
+
+<br>
+
+<div class="row" style="width: 95% ; padding-left: 40px ">
+    <table border="1" class="table table-striped table-hover table-sm">
+        <tr>
+            <td>TVA 10%</td>
+            <td>TVA 20%</td>
+            <td>HT</td>
+            <td>TTC</td>
+        </tr>
+        <tr>
+            <td th:text="${facture.TVA10}"></td>
+            <td th:text="${facture.TVA20}"></td>
+            <td th:text="${facture.sommeHT}"></td>
+            <td th:text="${facture.sommeTTC}"></td>
+        </tr>
+    </table>
+</div>
+
+<br>
+
+<div>
+    <span th:text="${facture.dateFacture}"></span> - <span th:text="${facture.heureFacture}"></span>
+</div>
+
+<br>
+
+
+
+<br>
+
+<div class="row">
+    <a class="btn btn-outline-secondary" th:href="@{/factureValidNote/{id}(id=${facture.idNote})}" role="button"><i class="fas fa-home"></i> Facturer</a>
+</div>
+
+
 
 </body>
 </html>
