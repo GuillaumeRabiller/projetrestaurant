@@ -2,6 +2,7 @@ package com.cnam.nfa019projet.controller;
 
 import com.cnam.nfa019projet.repository.FrigoRepository;
 import com.cnam.nfa019projet.service.FrigoService;
+import com.cnam.nfa019projet.service.NoteService;
 import com.cnam.nfa019projet.service.StockService;
 import com.cnam.nfa019projet.form.CreateTemp;
 import com.cnam.nfa019projet.service.UtilisateurService;
@@ -25,6 +26,9 @@ public class IndexController {
 
     @Autowired
     private UtilisateurService utilisateurService ;
+
+    @Autowired
+    private NoteService noteService;
 
 
     /**
@@ -114,8 +118,8 @@ public class IndexController {
 
     @RequestMapping(value = { "/indexServeur"}, method = RequestMethod.GET)
     public String homeServeur(Model model) {
-
-
+        model.addAttribute("noteEnCours", noteService.nbNoteEnCours());
+        model.addAttribute("tableDispo", noteService.nbTableDispo());
         return "/indexServeur";
     }
 

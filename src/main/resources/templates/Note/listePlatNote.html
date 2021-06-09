@@ -40,22 +40,24 @@
       <th>Description</th>
       <th>Prix</th>
       <th>Quantité</th>
-      <th>Ajouter</th>
-      <th>Retirer</th>
+      <th sec:authorize="hasRole('SERVEUR')">Ajouter</th>
+      <th sec:authorize="hasRole('SERVEUR')">Retirer</th>
     </tr>
     <tr th:each="plat:${plats}">
       <td th:text="${plat.nomCategorie}"></td>
       <td th:text="${plat.description}"></td>
       <td th:text="${plat.prix}"></td>
       <td th:text="${plat.quantite}"></td>
-      <td><a th:href="@{/ajoutPlat/{idNote}/{idPlat}(idNote=${idNote}, idPlat=${plat.idPlat})}"><i class="far fa-edit"></i></a></td>
-      <td><a th:href="@{/retraitPlat/{idNote}/{idPlat}(idNote=${idNote}, idPlat=${plat.idPlat})}"><i class="far fa-edit"></i></a></td>
+      <td sec:authorize="hasRole('SERVEUR')"><a th:href="@{/ajoutPlat/{idNote}/{idPlat}(idNote=${idNote}, idPlat=${plat.idPlat})}"><i class="far fa-plus-square"></i></a></td>
+      <td sec:authorize="hasRole('SERVEUR')"><a th:href="@{/retraitPlat/{idNote}/{idPlat}(idNote=${idNote}, idPlat=${plat.idPlat})}"><i class="far fa-minus-square"></i></a></td>
     </tr>
   </table>
 </div>
 
 <div>
-  <a class="btn btn-outline-primary" th:href="@{/createNoteCategorie/{id}(id=${idNote})}" role="button"><i class="fas fa-plus"></i> Ajout d'un Plat</a>
+  <a sec:authorize="hasRole('SERVEUR')" class="btn btn-outline-primary" th:href="@{/createNoteCategorie/{id}(id=${idNote})}" role="button"><i class="fas fa-plus"></i> Ajout d'un Plat</a>
+  <a class="backbutton" th:href="@{/readNote}" role="button"><i class="fas fa-undo-alt"></i> Retour </a>
+  <a sec:authorize="hasRole('SERVEUR')" class="backbutton" th:href="@{/factureNote/{id}(id=${idNote})}" role="button"><i class="far fa-credit-card"></i> Facturer </a>
 </div>
 
 

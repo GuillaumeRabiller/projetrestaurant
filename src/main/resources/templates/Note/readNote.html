@@ -40,16 +40,16 @@
       <th>Description</th>
       <th>Couverts</th>
       <th>Plats</th>
-      <th>Facturer</th>
-      <th>Maj</th>
+      <th sec:authorize="hasRole('SERVEUR')">Facturer</th>
+      <th sec:authorize="hasRole('SERVEUR')">Maj</th>
     </tr>
     <tr th:each="note:${notes}">
       <td th:text="${note.noTable}"></td>
       <td th:text="${note.description}"></td>
       <td th:text="${note.couvert}"></td>
-      <td><a th:href="@{/listePlatNote/{id}(id=${note.idNote})}"><i class="far fa-edit"></i></a></td>
-      <td><a th:href="@{/factureNote/{id}(id=${note.idNote})}"><i class="far fa-edit"></i></a></td>
-      <td><a th:href="@{/updateNote/{id}(id=${note.idNote})}"><i class="far fa-edit"></i></a></td>
+      <td><a th:href="@{/listePlatNote/{id}(id=${note.idNote})}"><i class="fas fa-shopping-cart"></i></a></td>
+      <td sec:authorize="hasRole('SERVEUR')"><a th:href="@{/factureNote/{id}(id=${note.idNote})}"><i class="far fa-credit-card"></i></a></td>
+      <td sec:authorize="hasRole('SERVEUR')"><a th:href="@{/updateNote/{id}(id=${note.idNote})}"><i class="far fa-edit"></i></a></td>
     </tr>
   </table>
 </div>

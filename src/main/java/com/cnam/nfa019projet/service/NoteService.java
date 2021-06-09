@@ -138,4 +138,21 @@ public class NoteService {
         return listePlat;
     }
 
+
+    //Méthode pour renvoyer le nb de commandes en cours à l'index serveur
+    public int nbNoteEnCours(){
+        return noteRepository.findAllByReglementFalse().size();
+    }
+
+
+    //Méthode pour renvoyer le nb de tables dispo à l'index serveur
+
+    public int nbTableDispo(){
+        return (tableRepository.findAll().size() - nbNoteEnCours());
+    }
+
+
+
+
+
 }

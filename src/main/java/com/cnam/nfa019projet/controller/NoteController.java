@@ -50,11 +50,16 @@ public class NoteController {
      *
      */
 
-    @RequestMapping(value = {"createNote"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/createNote"}, method = RequestMethod.GET)
     public String createNote(Model model){
         CreateNote aNote = new CreateNote();
         model.addAttribute("aNote", aNote);
+        //on n'envoie que la liste des tables qui n'ont pas une commande en cours
+        List<Note> notesEnCours = noteRepository.findAllByReglementFalse();
         List<Table> tableList = tableRepository.findAll();
+        for (Note note : notesEnCours) {
+            tableList.remove(note.getTable());
+        }
         model.addAttribute("tables", tableList);
         return "/Note/createNote";
     }
@@ -66,7 +71,7 @@ public class NoteController {
      *
      */
 
-    @RequestMapping(value = {"saveNote"}, method = RequestMethod.POST)
+    @RequestMapping(value = {"/saveNote"}, method = RequestMethod.POST)
     public String saveNote(@ModelAttribute("aNote") CreateNote aNote, BindingResult bindingResult, Model model){
         if (bindingResult.hasErrors() || aNote == null){
             return "/error";
@@ -325,6 +330,8 @@ public class NoteController {
             aNote.setReglement(true);
             noteRepository.save(aNote);
 
+            model.addAttribute("noteEnCours", noteService.nbNoteEnCours());
+            model.addAttribute("tableDispo", noteService.nbTableDispo());
             return "/indexServeur";
         } else {
             return "/error";

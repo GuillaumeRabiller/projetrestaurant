@@ -29,17 +29,19 @@
 
     <div class="row">
         <div class="col">
-            <a class="btnmenu btn-outline-secondary btn-lg" th:href="@{/createNote}" role="button"><i class="fas fa-carrot"></i>   Nouvelle Commande</a>
+            <a class="btnmenu btn-outline-secondary btn-lg" th:href="@{/createNote}" role="button"><i class="fas fa-cart-plus"></i>   Nouvelle Commande - <span th:text="${tableDispo}"></span> tables restantes dispo</a>
         </div>
     </div>
     <div class="row">
         <div class="col">
-            <a class="btnmenu btn-outline-secondary btn-lg" th:href="@{/readNote}" role="button"><i class="fas fa-boxes"></i>   Editer / Facturer une commande</a>
+            <a class="btnmenu btn-outline-secondary btn-lg" th:href="@{/readNote}" role="button"><i class="fas fa-edit"></i>   Editer / Facturer Commande - <span th:text="${noteEnCours}"></span> commandes en cours</a>
         </div>
     </div>
 
 
+    <!-- ------------------------    FOOTER    ---------------------------- -->
 
+    <div th:replace="Fragments/footer :: footer"></div>
 
 
 

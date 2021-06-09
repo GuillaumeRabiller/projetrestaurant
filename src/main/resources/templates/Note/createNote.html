@@ -40,7 +40,7 @@
       <select th:field="*{tableId}" class="form-select" th:required>
         <option th:each="table : ${tables}"
                 th:value="${table.id}"
-                th:text="${table.description}"/>
+                th:text="${table.noTable} + ' - ' + ${table.description}"/>
       </select>
       <br>
     </div>
@@ -51,7 +51,7 @@
       <br>
     </div>
 
-    <input type="submit" value="Submit" />
+    <input type="submit" value="Valider" />
     <input type="reset" value="Reset" />
     <a class="backbutton" th:href="@{/index}" role="button"><i class="fas fa-home"></i> Annuler </a>
   </form>

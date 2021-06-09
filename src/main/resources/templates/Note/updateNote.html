@@ -56,13 +56,13 @@
                         th:value="${table.id}"
                         th:attr="table=${table.id}, showselected=(${table.id} == lastselected)"
                         th:selected="(${table.id == lastselected})"
-                        th:text="${table.noTable} + ' ' + ${table.description}"></option>
+                        th:text="${table.noTable} + ' - ' + ${table.description}"></option>
             </select>
             <br>
         </div>
 
         <input type="submit" value="Update note" />
-        <a class="backbutton" th:href="@{/readNote}" role="button"><i class="fas fa-home"></i> Retour </a>
+        <a class="backbutton" th:href="@{/readNote}" role="button"><i class="fas fa-undo-alt"></i> Retour </a>
     </form>
 </div>
 

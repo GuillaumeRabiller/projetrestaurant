@@ -24,6 +24,10 @@
 <!--  --------------------    MAIN DE LA PAGE     -------------------  -->
 
 
+<div class="row">
+  <a class="btn btn-outline-secondary" th:href="@{/index}" role="button"><i class="fas fa-home"></i> Retour à l'index</a>
+</div>
+
 <br>
 <br>
 
@@ -40,7 +44,8 @@
   </table>
 </div>
 <br>
-<a class="backbutton" th:href="@{'/createNoteCategorie/'+ ${note}} " role="button"><i class="fas fa-home"></i> Retour au choix de Catégorie </a>
+<a class="backbutton" th:href="@{'/createNoteCategorie/'+ ${note}} " role="button"><i class="fas fa-undo-alt"></i> Retour au choix de Catégorie </a>
+<a class="backbutton" th:href="@{/listePlatNote/{idNote}(idNote=${note})}" role="button"><i class="fas fa-fast-backward"></i> Retour </a>
 
 
 <script th:inline="javascript">

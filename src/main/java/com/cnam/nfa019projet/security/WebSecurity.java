@@ -55,10 +55,10 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                             "readPlat", "createPlat", "updatePlat/**", "deletePlat",
                             "createTable", "updateTable/**", "deleteTable").hasRole("ADMIN")
                     .antMatchers("/indexUtil", "/createTemp").hasRole("UTILISATEUR")
-                    .antMatchers("/indexServeur", "createNote", "createNoteCategorie", "createNotePlat", "readNote","listePlatNote", "updateNote", "factureNote").hasRole("SERVEUR")
+                    .antMatchers("/indexServeur", "createNote", "createNoteCategorie", "createNotePlat", "updateNote", "factureNote").hasRole("SERVEUR")
                     .antMatchers( "/readStock", "/readProduit",
                             "/updateStock","/chooseProduct", "/createStock", "/readFrigo", "/historiqueFrigo").hasAnyRole("ADMIN", "UTILISATEUR")
-                    .antMatchers("/readTable").hasAnyRole("SERVEUR", "ADMIN")
+                    .antMatchers("/readTable", "readNote","listePlatNote").hasAnyRole("SERVEUR", "ADMIN")
                     .antMatchers("/", "/index", "/about").hasAnyRole("ADMIN","UTILISATEUR","SERVEUR")
                     .antMatchers( "/login", "/styles/**", "/pics/**", "/error", "/bdd/**").permitAll()
                     .anyRequest().authenticated()
