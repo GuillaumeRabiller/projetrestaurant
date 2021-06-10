@@ -17,54 +17,56 @@
 
 <body class="container">
 
-    <!-- ------------------------    HEADER    ---------------------------- -->
+    <div id="main">
 
-    <div th:replace="Fragments/header :: header"></div>
+        <!-- ------------------------    HEADER    ---------------------------- -->
 
-    <!--  --------------------    MAIN DE LA PAGE     -------------------  -->
+        <div th:replace="Fragments/header :: header"></div>
 
-    <div class="row">
-        <a class="btn btn-outline-secondary" th:href="@{/index}" role="button"><i class="fas fa-home"></i> Retour au Tableau de Bord</a>
+        <!--  --------------------    MAIN DE LA PAGE     -------------------  -->
+
+        <div class="row">
+            <a class="btn btn-outline-secondary" th:href="@{/index}" role="button"><i class="fas fa-home"></i> Retour au Tableau de Bord</a>
+        </div>
+
+        <br>
+        <br>
+
+        <h1>Liste des catégories de produit :</h1>
+        <div class="row" style="width: 95% ; padding-left: 40px ">
+            <table border="1" class="table table-striped table-hover table-sm">
+                <tr>
+                    <th>id</th>
+                    <th>Nom de la catégorie</th>
+                    <th>Editer</th>
+                    <th>Supprimer</th>
+                </tr>
+                <tr th:each="categorie:${categorieList}">
+                    <td th:text="${categorie.id}"></td>
+                    <td th:text="${categorie.nomCategorie}"></td>
+                    <td><a th:href="@{/updateCategorie/{id}(id=${categorie.id})}"><i class="far fa-edit"></i></a></td>
+                    <td><a th:href="@{/verifDeleteCategorie/{id}(id=${categorie.id})}"><i class="far fa-trash-alt"></i></a></td>
+                </tr>
+            </table>
+        </div>
+
+
+
+        <div>
+        <a class="btn btn-outline-primary"  th:href="@{/createCategorie}" role="button"><i class="fas fa-plus"></i> Création d'une nouvelle catégorie</a>
+        </div>
+
+        <br>
+        <br>
+
+
+
+        <!-- ------------------------    FOOTER    ---------------------------- -->
+
+        <div th:replace="Fragments/footer :: footer"></div>
+
+
     </div>
-
-    <br>
-    <br>
-
-    <h1>Liste des catégories de produit :</h1>
-    <div class="row" style="width: 95% ; padding-left: 40px ">
-        <table border="1" class="table table-striped table-hover table-sm">
-            <tr>
-                <th>id</th>
-                <th>Nom de la catégorie</th>
-                <th>Editer</th>
-                <th>Supprimer</th>
-            </tr>
-            <tr th:each="categorie:${categorieList}">
-                <td th:text="${categorie.id}"></td>
-                <td th:text="${categorie.nomCategorie}"></td>
-                <td><a th:href="@{/updateCategorie/{id}(id=${categorie.id})}"><i class="far fa-edit"></i></a></td>
-                <td><a th:href="@{/verifDeleteCategorie/{id}(id=${categorie.id})}"><i class="far fa-trash-alt"></i></a></td>
-            </tr>
-        </table>
-    </div>
-
-
-
-    <div>
-    <a class="btn btn-outline-primary"  th:href="@{/createCategorie}" role="button"><i class="fas fa-plus"></i> Création d'une nouvelle catégorie</a>
-    </div>
-
-    <br>
-    <br>
-
-
-
-    <!-- ------------------------    FOOTER    ---------------------------- -->
-
-    <div th:replace="Fragments/footer :: footer"></div>
-
-
-
 
 </body>
 </html>

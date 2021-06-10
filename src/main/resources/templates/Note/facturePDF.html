@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+  <!-- CSS + Bootstrap CSS -->
+  <link rel="stylesheet" th:href="@{styles/css/style.css}"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto&display=swap">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+  <title>Génération facture PDF</title>
+</head>
+
+<body class="container">
+
+    <div class="row">
+      <div>
+        LE RESTAURANT DU PORT
+      </div>
+      <div>
+        CUISINE AUDACIEUSE GASTRONOMIQUE
+      </div>
+      <div>
+        3 RUE DU PORT LAVIGNE
+      </div>
+      <div>
+        44000 NANTES - TEL. 02 00 00 00 00
+      </div>
+    </div>
+
+    <br>
+
+    <div>
+      TABLE <span th:text="${facture.noTable}"></span>
+    </div>
+    <div>
+      <span th:text="${facture.nbCouvert}"></span> COUVERTS - <span th:text="${facture.serveur}"></span>
+    </div>
+
+    <br>
+
+    <div>
+      <table class="tablefacture">
+        <tr th:each="plat:${facture.plats}">
+          <td th:text="${plat.quantite}"></td>
+          <td th:text="${plat.description}"></td>
+          <td th:text="${plat.prix}"></td>
+        </tr>
+      </table>
+    </div>
+
+    <br>
+
+    <div>
+      TOTAL <span th:text="${facture.sommeTTC}"></span> €
+    </div>
+
+    <br>
+
+    <div>
+      <table class="tablefacture">
+        <tr>
+          <td>TVA 10%</td>
+          <td>TVA 20%</td>
+          <td>HT</td>
+          <td>TTC</td>
+        </tr>
+        <tr>
+          <td th:text="${facture.TVA10}"></td>
+          <td th:text="${facture.TVA20}"></td>
+          <td th:text="${facture.sommeHT}"></td>
+          <td th:text="${facture.sommeTTC}"></td>
+        </tr>
+      </table>
+    </div>
+
+    <br>
+
+    <div>
+      <span th:text="${facture.dateFacture}"></span> - <span th:text="${facture.heureFacture}"></span>
+    </div>
+
+    <br>
+    <br>
+
+
+</body>
+</html>

@@ -18,65 +18,67 @@
 
 <body class="container">
 
-    <!-- ------------------------    HEADER    ---------------------------- -->
+    <div id="main">
 
-    <div th:replace="Fragments/header :: header"></div>
+        <!-- ------------------------    HEADER    ---------------------------- -->
 
-    <!--  --------------------    MAIN DE LA PAGE     -------------------  -->
+        <div th:replace="Fragments/header :: header"></div>
+
+        <!--  --------------------    MAIN DE LA PAGE     -------------------  -->
 
 
-    <div class="row">
-        <a class="btn btn-outline-secondary" th:href="@{/index}" role="button"><i class="fas fa-home"></i> Retour à l'index</a>
+        <div class="row">
+            <a class="btn btn-outline-secondary" th:href="@{/index}" role="button"><i class="fas fa-home"></i> Retour à l'index</a>
+        </div>
+
+
+        <br>
+        <br>
+
+
+       <div class="row">
+            <h1>Création d'un Plat</h1>
+
+
+            <form th:action="@{/savePlat}"
+                  th:object="${aPlat}" method="POST">
+                <div class="form-group">
+                    <label class="form-label">Description</label>
+                    <input class="form-control" type="text" th:field="*{description}" th:required th:minlength="2" th:maxlength="64"/>
+                    <span class="error" th:if="${#fields.hasErrors('description')}">Erreur sur la description</span>
+                    <br>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Prix</label>
+                    <input class="form-control" type="text" th:field="*{prix}" th:required />
+                    <span class="error" th:if="${#fields.hasErrors('prix')}" th:errors="*{prix}"></span>
+                    <br>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Catégorie de plat</label>
+                    <select th:field="*{categorieId}" class="form-select" th:required>
+                        <option th:each="categorie : ${categorieList}"
+                                    th:value="${categorie.id}"
+                                    th:text="${categorie.nomCategorie}"/>
+                    </select>
+                    <br>
+                </div>
+                    <input type="submit" value="Submit" />
+                    <input type="reset" value="Reset" />
+                <a class="backbutton" th:href="@{/readPlat}" role="button"><i class="fas fa-home"></i> Retour </a>
+            </form>
+       </div>
+
+        <br>
+        <br>
+
+
+
+        <!-- ------------------------    FOOTER    ---------------------------- -->
+
+        <div th:replace="Fragments/footer :: footer"></div>
+
     </div>
-
-
-    <br>
-    <br>
-
-
-   <div class="row">
-        <h1>Création d'un Plat</h1>
-
-
-        <form th:action="@{/savePlat}"
-              th:object="${aPlat}" method="POST">
-            <div class="form-group">
-                <label class="form-label">Description</label>
-                <input class="form-control" type="text" th:field="*{description}" th:required th:minlength="2" th:maxlength="64"/>
-                <span class="error" th:if="${#fields.hasErrors('description')}">Erreur sur la description</span>
-                <br>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Prix</label>
-                <input class="form-control" type="text" th:field="*{prix}" th:required />
-                <span class="error" th:if="${#fields.hasErrors('prix')}" th:errors="*{prix}"></span>
-                <br>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Catégorie de plat</label>
-                <select th:field="*{categorieId}" class="form-select" th:required>
-                    <option th:each="categorie : ${categorieList}"
-                                th:value="${categorie.id}"
-                                th:text="${categorie.nomCategorie}"/>
-                </select>
-                <br>
-            </div>
-                <input type="submit" value="Submit" />
-                <input type="reset" value="Reset" />
-            <a class="backbutton" th:href="@{/readPlat}" role="button"><i class="fas fa-home"></i> Retour </a>
-        </form>
-   </div>
-
-    <br>
-    <br>
-
-
-
-    <!-- ------------------------    FOOTER    ---------------------------- -->
-
-    <div th:replace="Fragments/footer :: footer"></div>
-
-
 
 </body>
 </html>

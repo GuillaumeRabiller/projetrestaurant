@@ -1,7 +1,9 @@
 package com.cnam.nfa019projet.form;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 public class FactureNote {
@@ -16,17 +18,17 @@ public class FactureNote {
 
     private List<ListePlatFacture> plats ;
 
-    private float sommeTTC ;
+    private BigDecimal sommeTTC ;
 
-    private float sommeHT ;
+    private BigDecimal sommeHT ;
 
-    private float TVA10 ;
+    private BigDecimal TVA10 ;
 
-    private float TVA20 ;
+    private BigDecimal TVA20 ;
 
     private LocalDate dateFacture = LocalDate.now() ;
 
-    private LocalTime heureFacture = LocalTime.now() ;
+    private LocalTime heureFacture = LocalTime.now().truncatedTo(ChronoUnit.SECONDS) ;
 
     private long idNote ;
 
@@ -69,35 +71,35 @@ public class FactureNote {
         this.plats = plats;
     }
 
-    public float getSommeTTC() {
+    public BigDecimal getSommeTTC() {
         return sommeTTC;
     }
 
-    public void setSommeTTC(float sommeTTC) {
+    public void setSommeTTC(BigDecimal sommeTTC) {
         this.sommeTTC = sommeTTC;
     }
 
-    public float getSommeHT() {
+    public BigDecimal getSommeHT() {
         return sommeHT;
     }
 
-    public void setSommeHT(float sommeHT) {
+    public void setSommeHT(BigDecimal sommeHT) {
         this.sommeHT = sommeHT;
     }
 
-    public float getTVA10() {
+    public BigDecimal getTVA10() {
         return TVA10;
     }
 
-    public void setTVA10(float TVA10) {
+    public void setTVA10(BigDecimal TVA10) {
         this.TVA10 = TVA10;
     }
 
-    public float getTVA20() {
+    public BigDecimal getTVA20() {
         return TVA20;
     }
 
-    public void setTVA20(float TVA20) {
+    public void setTVA20(BigDecimal TVA20) {
         this.TVA20 = TVA20;
     }
 

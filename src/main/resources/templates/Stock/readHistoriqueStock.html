@@ -17,84 +17,86 @@
 
 <body class="container">
 
-    <!-- ------------------------    HEADER    ---------------------------- -->
+    <div id="main">
 
-    <div th:replace="Fragments/header :: header"></div>
+        <!-- ------------------------    HEADER    ---------------------------- -->
 
-
-    <!--  --------------------    MAIN DE LA PAGE     -------------------  -->
-
-
-    <div class="row">
-        <a class="btn btn-outline-secondary" th:href="@{/index}" role="button"><i class="fas fa-home"></i> Retour au Tableau de Bord</a>
-    </div>
+        <div th:replace="Fragments/header :: header"></div>
 
 
-    <br>
-    <br>
+        <!--  --------------------    MAIN DE LA PAGE     -------------------  -->
 
 
-    <h1>Historique du stock :</h1>
-
-    <div class="row" style="width: 95% ; padding-left: 40px ">
-        <table border="1" class="table table-striped table-hover table-sm">
-            <tr>
-                <th>id Produit</th>
-                <th>Nom du Produit</th>
-                <th>Catégorie du produit</th>
-                <th>Date du mouvement</th>
-                <th>Statut</th>
-                <th>Utilisateur</th>
-            </tr>
-            <tr th:each="stock:${historiqueList}">
-                <td th:text="${stock.idProduit}"></td>
-                <td th:text="${stock.nomProduit}"></td>
-                <td th:text="${stock.categorie}"></td>
-                <td th:text="${stock.dateMouvement}"></td>
-                <td th:text="${stock.statut}"></td>
-                <td th:text="${stock.utilisateur}"></td>
-            </tr>
-        </table>
-    </div>
-
-    <div class="row">
-        <div class="col">
-            <form th:action="@{/readHistoriqueStock}"
-                  th:object="${dateStock}" method="POST">
-                <div class="form-group">
-                    <label>Historique du Stock</label>
-                    <input type="date" th:field="*{date}" />
-                    <span class="error" th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></span>
-                    <br>
-                </div>
-                <input type="submit" value="Submit" />
-            </form>
+        <div class="row">
+            <a class="btn btn-outline-secondary" th:href="@{/index}" role="button"><i class="fas fa-home"></i> Retour au Tableau de Bord</a>
         </div>
-        <div class="col">
-            <form sec:authorize="hasRole('ADMIN')" th:action="@{/readHistoriqueStockById}"
-                  th:object="${dateStock}" method="POST">
-                <div class="form-group">
-                    <label>Historique par ID</label>
-                    <input type="text" th:field="*{id}" />
-                    <span class="error" th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></span>
-                    <br>
-                </div>
-                <input type="submit" value="Submit" />
-            </form>
+
+
+        <br>
+        <br>
+
+
+        <h1>Historique du stock :</h1>
+
+        <div class="row" style="width: 95% ; padding-left: 40px ">
+            <table border="1" class="table table-striped table-hover table-sm">
+                <tr>
+                    <th>id Produit</th>
+                    <th>Nom du Produit</th>
+                    <th>Catégorie du produit</th>
+                    <th>Date du mouvement</th>
+                    <th>Statut</th>
+                    <th>Utilisateur</th>
+                </tr>
+                <tr th:each="stock:${historiqueList}">
+                    <td th:text="${stock.idProduit}"></td>
+                    <td th:text="${stock.nomProduit}"></td>
+                    <td th:text="${stock.categorie}"></td>
+                    <td th:text="${stock.dateMouvement}"></td>
+                    <td th:text="${stock.statut}"></td>
+                    <td th:text="${stock.utilisateur}"></td>
+                </tr>
+            </table>
         </div>
+
+        <div class="row">
+            <div class="col">
+                <form th:action="@{/readHistoriqueStock}"
+                      th:object="${dateStock}" method="POST">
+                    <div class="form-group">
+                        <label>Historique du Stock</label>
+                        <input type="date" th:field="*{date}" />
+                        <span class="error" th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></span>
+                        <br>
+                    </div>
+                    <input type="submit" value="Submit" />
+                </form>
+            </div>
+            <div class="col">
+                <form sec:authorize="hasRole('ADMIN')" th:action="@{/readHistoriqueStockById}"
+                      th:object="${dateStock}" method="POST">
+                    <div class="form-group">
+                        <label>Historique par ID</label>
+                        <input type="text" th:field="*{id}" />
+                        <span class="error" th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></span>
+                        <br>
+                    </div>
+                    <input type="submit" value="Submit" />
+                </form>
+            </div>
+        </div>
+
+        <br>
+        <br>
+
+
+
+        <!-- ------------------------    FOOTER    ---------------------------- -->
+
+        <div th:replace="Fragments/footer :: footer"></div>
+
+
     </div>
-
-    <br>
-    <br>
-
-
-
-    <!-- ------------------------    FOOTER    ---------------------------- -->
-
-    <div th:replace="Fragments/footer :: footer"></div>
-
-
-
 
 </body>
 

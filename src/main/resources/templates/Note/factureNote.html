@@ -17,96 +17,96 @@
 
 <body class="container">
 
-<!-- ------------------------    HEADER    ---------------------------- -->
+    <!-- ------------------------    HEADER    ---------------------------- -->
 
-<div th:replace="Fragments/header :: header"></div>
+    <div th:replace="Fragments/header :: header"></div>
 
-<!--  --------------------    MAIN DE LA PAGE     -------------------  -->
+    <!--  --------------------    MAIN DE LA PAGE     -------------------  -->
 
-<div class="row">
-    <a class="btn btn-outline-secondary" th:href="@{/index}" role="button"><i class="fas fa-home"></i> Retour à l'index</a>
-</div>
+    <div class="row">
+        <a class="btn btn-outline-secondary" th:href="@{/index}" role="button"><i class="fas fa-home"></i> Retour à l'index</a>
+    </div>
 
 
-<br>
-<br>
+    <br>
+    <br>
 
-<div class="row">
+    <div class="row">
+        <div>
+            LE RESTAURANT DU PORT
+        </div>
+        <div>
+            CUISINE AUDACIEUSE GASTRONOMIQUE
+        </div>
+        <div>
+            3 RUE DU PORT LAVIGNE
+        </div>
+        <div>
+            44000 NANTES - TEL. 02 00 00 00 00
+        </div>
+    </div>
+
+    <br>
+
     <div>
-        LE RESTAURANT DU PORT
+        TABLE <span th:text="${facture.noTable}"></span>
     </div>
     <div>
-        CUISINE AUDACIEUSE GASTRONOMIQUE
+        <span th:text="${facture.nbCouvert}"></span> COUVERTS - <span th:text="${facture.serveur}"></span>
     </div>
+
+    <br>
+
     <div>
-        3 RUE DU PORT LAVIGNE
+        <table class="tablefacture">
+            <tr th:each="plat:${facture.plats}">
+                <td th:text="${plat.quantite}"></td>
+                <td th:text="${plat.description}"></td>
+                <td th:text="${plat.prix}"></td>
+            </tr>
+        </table>
     </div>
+
+    <br>
+
     <div>
-        44000 NANTES - TEL. 02 00 00 00 00
+        TOTAL <span th:text="${facture.sommeTTC}"></span> €
     </div>
-</div>
 
-<br>
+    <br>
 
-<div>
-    TABLE <span th:text="${facture.noTable}"></span>
-</div>
-<div>
-    <span th:text="${facture.nbCouvert}"></span> COUVERTS - <span th:text="${facture.serveur}"></span>
-</div>
+    <div>
+        <table class="tablefacture">
+            <tr>
+                <td>TVA 10%</td>
+                <td>TVA 20%</td>
+                <td>HT</td>
+                <td>TTC</td>
+            </tr>
+            <tr>
+                <td th:text="${facture.TVA10}"></td>
+                <td th:text="${facture.TVA20}"></td>
+                <td th:text="${facture.sommeHT}"></td>
+                <td th:text="${facture.sommeTTC}"></td>
+            </tr>
+        </table>
+    </div>
 
-<br>
+    <br>
 
-<div class="row" style="width: 95% ; padding-left: 40px ">
-    <table border="1" class="table table-striped table-hover table-sm">
-        <tr th:each="plat:${facture.plats}">
-            <td th:text="${plat.quantite}"></td>
-            <td th:text="${plat.description}"></td>
-            <td th:text="${plat.prix}"></td>
-        </tr>
-    </table>
-</div>
+    <div>
+        <span th:text="${facture.dateFacture}"></span> - <span th:text="${facture.heureFacture}"></span>
+    </div>
 
-<br>
-
-<div>
-    TOTAL <span th:text="${facture.sommeTTC}"></span>
-</div>
-
-<br>
-
-<div class="row" style="width: 95% ; padding-left: 40px ">
-    <table border="1" class="table table-striped table-hover table-sm">
-        <tr>
-            <td>TVA 10%</td>
-            <td>TVA 20%</td>
-            <td>HT</td>
-            <td>TTC</td>
-        </tr>
-        <tr>
-            <td th:text="${facture.TVA10}"></td>
-            <td th:text="${facture.TVA20}"></td>
-            <td th:text="${facture.sommeHT}"></td>
-            <td th:text="${facture.sommeTTC}"></td>
-        </tr>
-    </table>
-</div>
-
-<br>
-
-<div>
-    <span th:text="${facture.dateFacture}"></span> - <span th:text="${facture.heureFacture}"></span>
-</div>
-
-<br>
+    <br>
 
 
 
-<br>
+    <br>
 
-<div class="row">
-    <a class="btn btn-outline-secondary" th:href="@{/factureValidNote/{id}(id=${facture.idNote})}" role="button"><i class="far fa-credit-card"></i> Facturer</a>
-</div>
+    <div class="row">
+        <a class="btn btn-outline-secondary" th:href="@{/factureValidNote/{id}(id=${facture.idNote})}" role="button"><i class="far fa-credit-card"></i> Facturer</a>
+    </div>
 
 
 

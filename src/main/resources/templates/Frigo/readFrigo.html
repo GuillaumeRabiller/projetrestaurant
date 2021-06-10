@@ -17,58 +17,60 @@
 
 <body class="container">
 
-    <!-- ------------------------    HEADER    ---------------------------- -->
+    <div id="main">
 
-    <div th:replace="Fragments/header :: header"></div>
+        <!-- ------------------------    HEADER    ---------------------------- -->
+
+        <div th:replace="Fragments/header :: header"></div>
 
 
-    <!--  --------------------    MAIN DE LA PAGE     -------------------  -->
+        <!--  --------------------    MAIN DE LA PAGE     -------------------  -->
 
-    <div class="row">
-        <a class="btn btn-outline-secondary" th:href="@{/index}" role="button"><i class="fas fa-home"></i> Retour au Tableau de Bord</a>
+        <div class="row">
+            <a class="btn btn-outline-secondary" th:href="@{/index}" role="button"><i class="fas fa-home"></i> Retour au Tableau de Bord</a>
+        </div>
+
+
+        <br>
+        <br>
+
+
+        <h1>Liste des frigos :</h1>
+        <div class="row" style="width: 95% ; padding-left: 40px ">
+            <table border="1" class="table table-striped table-hover table-sm">
+                <tr>
+                    <th sec:authorize="hasRole('ADMIN')">id</th>
+                    <th>Nom du Frigo</th>
+                    <th>Description</th>
+                    <th>Relevés T°</th>
+                    <th sec:authorize="hasRole('ADMIN')">Editer</th>
+                    <th sec:authorize="hasRole('ADMIN')">Supprimer</th>
+                </tr>
+                <tr th:each="frigo:${frigoList}">
+                    <td sec:authorize="hasRole('ADMIN')" th:text="${frigo.id}"></td>
+                    <td th:text="${frigo.nomFrigo}"></td>
+                    <td th:text="${frigo.descFrigo}"></td>
+                    <td><a th:href="@{/historiqueFrigo/{id}(id=${frigo.id})}"><i class="fas fa-history"></i></a></td>
+                    <td sec:authorize="hasRole('ADMIN')"><a th:href="@{/updateFrigo/{id}(id=${frigo.id})}"><i class="far fa-edit"></i></a></td>
+                    <td sec:authorize="hasRole('ADMIN')"><a th:href="@{/verifDeleteFrigo/{id}(id=${frigo.id})}"><i class="far fa-trash-alt"></i></a></td>
+                </tr>
+            </table>
+        </div>
+
+        <div sec:authorize="hasRole('ADMIN')">
+            <a class="btn btn-outline-primary" th:href="@{/createFrigo}" role="button"><i class="fas fa-plus"></i> Création d'un frigo</a>
+        </div>
+
+
+        <br>
+        <br>
+
+
+        <!-- ------------------------    FOOTER    ---------------------------- -->
+
+        <div th:replace="Fragments/footer :: footer"></div>
+
     </div>
-
-
-    <br>
-    <br>
-
-
-    <h1>Liste des frigos :</h1>
-    <div class="row" style="width: 95% ; padding-left: 40px ">
-        <table border="1" class="table table-striped table-hover table-sm">
-            <tr>
-                <th sec:authorize="hasRole('ADMIN')">id</th>
-                <th>Nom du Frigo</th>
-                <th>Description</th>
-                <th>Relevés T°</th>
-                <th sec:authorize="hasRole('ADMIN')">Editer</th>
-                <th sec:authorize="hasRole('ADMIN')">Supprimer</th>
-            </tr>
-            <tr th:each="frigo:${frigoList}">
-                <td sec:authorize="hasRole('ADMIN')" th:text="${frigo.id}"></td>
-                <td th:text="${frigo.nomFrigo}"></td>
-                <td th:text="${frigo.descFrigo}"></td>
-                <td><a th:href="@{/historiqueFrigo/{id}(id=${frigo.id})}"><i class="fas fa-history"></i></a></td>
-                <td sec:authorize="hasRole('ADMIN')"><a th:href="@{/updateFrigo/{id}(id=${frigo.id})}"><i class="far fa-edit"></i></a></td>
-                <td sec:authorize="hasRole('ADMIN')"><a th:href="@{/verifDeleteFrigo/{id}(id=${frigo.id})}"><i class="far fa-trash-alt"></i></a></td>
-            </tr>
-        </table>
-    </div>
-
-    <div sec:authorize="hasRole('ADMIN')">
-        <a class="btn btn-outline-primary" th:href="@{/createFrigo}" role="button"><i class="fas fa-plus"></i> Création d'un frigo</a>
-    </div>
-
-
-    <br>
-    <br>
-
-
-    <!-- ------------------------    FOOTER    ---------------------------- -->
-
-    <div th:replace="Fragments/footer :: footer"></div>
-
-
 
 
 </body>

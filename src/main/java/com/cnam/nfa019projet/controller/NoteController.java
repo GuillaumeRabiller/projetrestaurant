@@ -6,8 +6,10 @@ import com.cnam.nfa019projet.repository.CategoriePlatRepository;
 import com.cnam.nfa019projet.repository.NoteRepository;
 import com.cnam.nfa019projet.repository.PlatRepository;
 import com.cnam.nfa019projet.repository.TableRepository;
+import com.cnam.nfa019projet.service.PDFService;
 import com.cnam.nfa019projet.service.NoteService;
 import com.cnam.nfa019projet.service.UtilisateurService;
+import com.lowagie.text.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +17,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 import javax.validation.Valid;
+import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -324,9 +328,14 @@ public class NoteController {
      */
 
     @RequestMapping(value = {"/factureValidNote/{id}"}, method = RequestMethod.GET)
-    public String factureValidNote(@PathVariable("id") long idNote, Model model){
+    public String factureValidNote(@PathVariable("id") long idNote, Model model) throws IOException, DocumentException {
         Note aNote = noteRepository.findById(idNote).orElseThrow(() -> new IllegalArgumentException("Invalid note Id:" + idNote));
         if(aNote != null){
+            FactureNote facture = noteService.facturer(aNote) ;
+            String templateHtml = PDFService.parseFactureTemplate(facture) ;
+            PDFService.generatePdfFromHtml (templateHtml, "facture " + idNote) ;
+
+            aNote.setDate(LocalDateTime.of(facture.getDateFacture(), facture.getHeureFacture()));
             aNote.setReglement(true);
             noteRepository.save(aNote);
 

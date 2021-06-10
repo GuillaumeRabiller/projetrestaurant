@@ -16,43 +16,45 @@
 
 <body class="container">
 
-    <!-- ------------------------    HEADER    ---------------------------- -->
+    <div id="main">
 
-    <div th:replace="Fragments/header :: header"></div>
+        <!-- ------------------------    HEADER    ---------------------------- -->
+
+        <div th:replace="Fragments/header :: header"></div>
 
 
-    <!--  --------------------    MAIN DE LA PAGE     -------------------  -->
+        <!--  --------------------    MAIN DE LA PAGE     -------------------  -->
 
 
-    <h1>Liste des statuts :</h1>
-    <div class="row">
-        <table border="1" class="table table-striped table-hover">
-            <tr>
-                <th>id</th>
-                <th>Nom du Statut</th>
-                <th>Editer</th>
-                <th>Supprimer</th>
-            </tr>
-            <tr th:each="statut:${statutList}">
-                <td th:text="${statut.id}"></td>
-                <td th:text="${statut.nomStatut}"></td>
-                <td><a th:href="@{/updateStatut/{id}(id=${statut.id})}">Edit</a></td>
-                <td><a th:href="@{/deleteStatut/{id}(id=${statut.id})}">Delete</a></td>
-            </tr>
-        </table>
+        <h1>Liste des statuts :</h1>
+        <div class="row">
+            <table border="1" class="table table-striped table-hover">
+                <tr>
+                    <th>id</th>
+                    <th>Nom du Statut</th>
+                    <th>Editer</th>
+                    <th>Supprimer</th>
+                </tr>
+                <tr th:each="statut:${statutList}">
+                    <td th:text="${statut.id}"></td>
+                    <td th:text="${statut.nomStatut}"></td>
+                    <td><a th:href="@{/updateStatut/{id}(id=${statut.id})}">Edit</a></td>
+                    <td><a th:href="@{/deleteStatut/{id}(id=${statut.id})}">Delete</a></td>
+                </tr>
+            </table>
+        </div>
+
+        <a th:href="@{/index}">Retour à l'index</a>
+        <div>
+        <a th:href="@{/createStatut}">Création d'un nouveau statut</a>
+        </div>
+
+
+        <!-- ------------------------    FOOTER    ---------------------------- -->
+
+        <div th:replace="Fragments/footer :: footer"></div>
+
     </div>
-
-    <a th:href="@{/index}">Retour à l'index</a>
-    <div>
-    <a th:href="@{/createStatut}">Création d'un nouveau statut</a>
-    </div>
-
-
-    <!-- ------------------------    FOOTER    ---------------------------- -->
-
-    <div th:replace="Fragments/footer :: footer"></div>
-
-
 
 
 </body>

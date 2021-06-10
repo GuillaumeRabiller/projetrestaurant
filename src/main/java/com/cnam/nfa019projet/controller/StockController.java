@@ -161,8 +161,8 @@ public class StockController {
             LocalDateTime dlc = dateEntree.plusDays(stock.getProduit().getDureeConservation());
             dlc.truncatedTo(ChronoUnit.SECONDS);
             EtiquetteForm etiquette = new EtiquetteForm(stock.getId(), stock.getProduit().getNomProduit(), dateEntree, dlc );
-            String templateHtml = EtiquetteService.parseEtiquetteTemplate(etiquette) ;
-            EtiquetteService.generatePdfFromHtml (templateHtml, stock.getId()) ;
+            String templateHtml = PDFService.parseEtiquetteTemplate(etiquette) ;
+            PDFService.generatePdfFromHtml (templateHtml, "etiq " + stock.getId()) ;
         }
         //Retour à la liste en Stock
         model.addAttribute("stockList", stockService.listeStock());

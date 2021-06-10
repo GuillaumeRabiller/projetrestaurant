@@ -17,37 +17,37 @@
 
 <body class="container">
 
-<!-- ------------------------    HEADER    ---------------------------- -->
+    <!-- ------------------------    HEADER    ---------------------------- -->
 
-<div th:replace="Fragments/header :: header"></div>
+    <div th:replace="Fragments/header :: header"></div>
 
-<!--  --------------------    MAIN DE LA PAGE     -------------------  -->
+    <!--  --------------------    MAIN DE LA PAGE     -------------------  -->
 
 
-<br>
-<br>
-
-<div class="row">
-    <h1>Suppression d'un produit</h1>
     <br>
-    <div th:if="${supr} == true">
-        Etes-vous sûr de vouloir supprimer le produit <span th:text="${aProduit.nomProduit}"></span>  ?
+    <br>
+
+    <div class="row">
+        <h1>Suppression d'un produit</h1>
         <br>
-        <br>
-        <a class="btn btn-success" th:href="@{/deleteProduit/{id}(id=${aProduit.id})}"><i class="fas fa-check"></i> Oui</a>
-        <a class="btn btn-danger" th:href="@{/readProduit}" role="button"><i class="fas fa-times"></i> Non </a>
+        <div th:if="${supr} == true">
+            Etes-vous sûr de vouloir supprimer le produit <span th:text="${aProduit.nomProduit}"></span>  ?
+            <br>
+            <br>
+            <a class="btn btn-success" th:href="@{/deleteProduit/{id}(id=${aProduit.id})}"><i class="fas fa-check"></i> Oui</a>
+            <a class="btn btn-danger" th:href="@{/readProduit}" role="button"><i class="fas fa-times"></i> Non </a>
+        </div>
+
+        <div th:if="${supr} != true">
+            <br>
+            Le produit <span th:text="${aProduit.nomProduit}"></span> est en cours de stock, sa suppression est impossible.
+            <br>
+            <br>
+            <a class="btn btn-outline-secondary" th:href="@{/readProduit}" role="button"><i class="fas fa-home"></i> Retour </a>
+        </div>
+
+
     </div>
-
-    <div th:if="${supr} != true">
-        <br>
-        Le produit <span th:text="${aProduit.nomProduit}"></span> est en cours de stock, sa suppression est impossible.
-        <br>
-        <br>
-        <a class="btn btn-outline-secondary" th:href="@{/readProduit}" role="button"><i class="fas fa-home"></i> Retour </a>
-    </div>
-
-
-</div>
 
 
 

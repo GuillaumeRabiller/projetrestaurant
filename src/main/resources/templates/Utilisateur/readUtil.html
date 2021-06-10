@@ -17,62 +17,64 @@
 
 <body class="container">
 
-    <!-- ------------------------    HEADER    ---------------------------- -->
+    <div id="main">
 
-    <div th:replace="Fragments/header :: header"></div>
+        <!-- ------------------------    HEADER    ---------------------------- -->
 
-    <!--  --------------------    MAIN DE LA PAGE     -------------------  -->
+        <div th:replace="Fragments/header :: header"></div>
 
-    <div class="row">
-        <a class="btn btn-outline-secondary" th:href="@{/index}" role="button"><i class="fas fa-home"></i> Retour au Tableau de Bord</a>
+        <!--  --------------------    MAIN DE LA PAGE     -------------------  -->
+
+        <div class="row">
+            <a class="btn btn-outline-secondary" th:href="@{/index}" role="button"><i class="fas fa-home"></i> Retour au Tableau de Bord</a>
+        </div>
+
+
+        <br>
+        <br>
+
+
+        <h1>Liste des utilisateurs</h1>
+        <div class="row" style="width: 95% ; padding-left: 40px ">
+            <table border="1" class="table table-striped table-hover table-sm">
+                <tr>
+                    <th>id</th>
+                    <th>Nom de famille</th>
+                    <th>Prénom</th>
+                    <th>email</th>
+                    <th>login</th>
+                    <th>role</th>
+                    <th>Editer</th>
+                    <th>Supprimer</th>
+                </tr>
+                <tr th:each="utilisateur:${userList}">
+                    <td th:text="${utilisateur.id}"></td>
+                    <td th:text="${utilisateur.nom}"></td>
+                    <td th:text="${utilisateur.prenom}"></td>
+                    <td th:text="${utilisateur.email}"></td>
+                    <td th:text="${utilisateur.login}"></td>
+                    <td th:text="${utilisateur.role}"></td>
+                    <td><a th:href="@{/updateUtil/{id}(id=${utilisateur.id})}"><i class="far fa-edit"></i></a></td>
+                    <td><a th:href="@{/verifDeleteUtil/{id}(id=${utilisateur.id})}"><i class="far fa-trash-alt"></i></a></td>
+                </tr>
+            </table>
+        </div>
+
+
+        <div>
+        <a class="btn btn-outline-primary"  th:href="@{/createUtil}" role="button"><i class="fas fa-user-plus"></i> Ajout d'un utilisateur</a>
+        </div>
+
+
+        <br>
+        <br>
+
+
+        <!-- ------------------------    FOOTER    ---------------------------- -->
+
+        <div th:replace="Fragments/footer :: footer"></div>
+
     </div>
-
-
-    <br>
-    <br>
-
-
-    <h1>Liste des utilisateurs</h1>
-    <div class="row" style="width: 95% ; padding-left: 40px ">
-        <table border="1" class="table table-striped table-hover table-sm">
-            <tr>
-                <th>id</th>
-                <th>Nom de famille</th>
-                <th>Prénom</th>
-                <th>email</th>
-                <th>login</th>
-                <th>role</th>
-                <th>Editer</th>
-                <th>Supprimer</th>
-            </tr>
-            <tr th:each="utilisateur:${userList}">
-                <td th:text="${utilisateur.id}"></td>
-                <td th:text="${utilisateur.nom}"></td>
-                <td th:text="${utilisateur.prenom}"></td>
-                <td th:text="${utilisateur.email}"></td>
-                <td th:text="${utilisateur.login}"></td>
-                <td th:text="${utilisateur.role}"></td>
-                <td><a th:href="@{/updateUtil/{id}(id=${utilisateur.id})}"><i class="far fa-edit"></i></a></td>
-                <td><a th:href="@{/verifDeleteUtil/{id}(id=${utilisateur.id})}"><i class="far fa-trash-alt"></i></a></td>
-            </tr>
-        </table>
-    </div>
-
-
-    <div>
-    <a class="btn btn-outline-primary"  th:href="@{/createUtil}" role="button"><i class="fas fa-user-plus"></i> Ajout d'un utilisateur</a>
-    </div>
-
-
-    <br>
-    <br>
-
-
-    <!-- ------------------------    FOOTER    ---------------------------- -->
-
-    <div th:replace="Fragments/footer :: footer"></div>
-
-
 
 </body>
 </html>

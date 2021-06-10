@@ -19,31 +19,32 @@
 
 <body class="container">
 
-    <!-- ------------------------    HEADER    ---------------------------- -->
+    <div id="main">
 
-    <div th:replace="Fragments/header :: header"></div>
+        <!-- ------------------------    HEADER    ---------------------------- -->
+
+        <div th:replace="Fragments/header :: header"></div>
 
 
 
-    <!--  --------------------    MAIN DE LA PAGE     -------------------  -->
+        <!--  --------------------    MAIN DE LA PAGE     -------------------  -->
 
-    <div class="row">
-        <div class="col">
-            <a class="btnmenu btn-outline-secondary btn-lg" th:href="@{/createNote}" role="button"><i class="fas fa-cart-plus"></i>   Nouvelle Commande - <span th:text="${tableDispo}"></span> tables restantes dispo</a>
+        <div class="row" style="padding-top: 100px;">
+            <div class="col">
+                <a class="btnmenuserveur btn-outline-secondary btn-lg" th:href="@{/createNote}" role="button"> <br> <i class="fas fa-cart-plus"></i>&emsp; Nouvelle Commande <br> <br> <span th:text="${tableDispo}"></span> tables restantes dispo</a>
+            </div>
+
+            <div class="col">
+                <a class="btnmenuserveur btn-outline-secondary btn-lg" th:href="@{/readNote}" role="button"> <br> <i class="fas fa-edit"></i>&emsp; Editer / Facturer Commande <br> <br> <span th:text="${noteEnCours}"></span> commandes en cours</a>
+            </div>
         </div>
+
+
+        <!-- ------------------------    FOOTER    ---------------------------- -->
+
+        <div th:replace="Fragments/footer :: footer"></div>
+
     </div>
-    <div class="row">
-        <div class="col">
-            <a class="btnmenu btn-outline-secondary btn-lg" th:href="@{/readNote}" role="button"><i class="fas fa-edit"></i>   Editer / Facturer Commande - <span th:text="${noteEnCours}"></span> commandes en cours</a>
-        </div>
-    </div>
-
-
-    <!-- ------------------------    FOOTER    ---------------------------- -->
-
-    <div th:replace="Fragments/footer :: footer"></div>
-
-
 
 </body>
 

@@ -17,37 +17,37 @@
 
 <body class="container">
 
-<!-- ------------------------    HEADER    ---------------------------- -->
+    <!-- ------------------------    HEADER    ---------------------------- -->
 
-<div th:replace="Fragments/header :: header"></div>
+    <div th:replace="Fragments/header :: header"></div>
 
-<!--  --------------------    MAIN DE LA PAGE     -------------------  -->
+    <!--  --------------------    MAIN DE LA PAGE     -------------------  -->
 
 
-<br>
-<br>
-
-<div class="row">
-    <h1>Suppression d'une table</h1>
     <br>
-    <div th:if="${supr} == true">
-        Etes-vous sûr de vouloir supprimer la table <span th:text="${aTable.noTable}"></span>  ?
+    <br>
+
+    <div class="row">
+        <h1>Suppression d'une table</h1>
         <br>
-        <br>
-        <a class="btn btn-success" th:href="@{/deleteTable/{id}(id=${aTable.id})}"><i class="fas fa-check"></i> Oui</a>
-        <a class="btn btn-danger" th:href="@{/readTable}" role="button"><i class="fas fa-times"></i> Non </a>
+        <div th:if="${supr} == true">
+            Etes-vous sûr de vouloir supprimer la table <span th:text="${aTable.noTable}"></span>  ?
+            <br>
+            <br>
+            <a class="btn btn-success" th:href="@{/deleteTable/{id}(id=${aTable.id})}"><i class="fas fa-check"></i> Oui</a>
+            <a class="btn btn-danger" th:href="@{/readTable}" role="button"><i class="fas fa-times"></i> Non </a>
+        </div>
+
+        <div th:if="${supr} != true">
+            <br>
+            La table <span th:text="${aTable.noTable}"></span> est allouée à plusieurs notes, sa suppression est impossible.
+            <br>
+            <br>
+            <a class="btn btn-outline-secondary" th:href="@{/readTable}" role="button"><i class="fas fa-home"></i> Retour </a>
+        </div>
+
+
     </div>
-
-    <div th:if="${supr} != true">
-        <br>
-        La table <span th:text="${aTable.noTable}"></span> est allouée à plusieurs notes, sa suppression est impossible.
-        <br>
-        <br>
-        <a class="btn btn-outline-secondary" th:href="@{/readTable}" role="button"><i class="fas fa-home"></i> Retour </a>
-    </div>
-
-
-</div>
 
 
 

@@ -1,6 +1,7 @@
 package com.cnam.nfa019projet.service;
 
 import com.cnam.nfa019projet.form.EtiquetteForm;
+import com.cnam.nfa019projet.form.FactureNote;
 import com.lowagie.text.DocumentException;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
@@ -12,7 +13,7 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.FileSystems;
 
-public class EtiquetteService {
+public class PDFService {
 
 
     //Méthode de parsing de l'étiquette
@@ -32,8 +33,26 @@ public class EtiquetteService {
         return convertToXhtml(htmlContent);
     }
 
-    //Méthode de génération de l'étiquette en PDF
-    public static void generatePdfFromHtml(String html, long id) throws DocumentException, IOException {
+    //Méthode de parsing de la facture
+    public static String parseFactureTemplate(FactureNote facture)  {
+        ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
+        templateResolver.setSuffix(".html");
+        templateResolver.setTemplateMode(TemplateMode.HTML);
+        templateResolver.setCharacterEncoding("UTF-8");
+
+        TemplateEngine templateEngine = new TemplateEngine();
+        templateEngine.setTemplateResolver(templateResolver);
+
+        Context context = new Context();
+        context.setVariable("facture", facture);
+
+        String htmlContent = templateEngine.process("/templates/Note/facturePDF",context);
+        return convertToXhtml(htmlContent);
+    }
+
+    //Méthode de génération en PDF
+
+    public static void generatePdfFromHtml(String html, String nom) throws DocumentException, IOException {
 
         String baseUrl = FileSystems
                 .getDefault()
@@ -45,7 +64,7 @@ public class EtiquetteService {
         renderer.setDocumentFromString(html, baseUrl);
         renderer.layout();
 
-        OutputStream outputStream = new FileOutputStream(id + ".pdf");
+        OutputStream outputStream = new FileOutputStream(nom + ".pdf");
         renderer.createPDF(outputStream);
 
         outputStream.close();

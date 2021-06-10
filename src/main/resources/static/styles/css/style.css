@@ -1,3 +1,12 @@
+body, html {
+    height:100%;
+}
+
+#main {
+    min-height:100%;
+    position:relative;
+}
+
 h1 {
     color:#8B265C;
 }
@@ -23,6 +32,11 @@ table tr td a {
     display:block;
     height:100%;
     width:100%;
+}
+
+.tablefacture {
+    table-layout: auto;
+    width: 300px ;
 }
 
 .error{
@@ -61,6 +75,20 @@ table tr td a {
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 
+.btnmenuserveur {
+    height:400px;
+    display: block;
+    font-weight: 600;
+    line-height: 3;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    user-select: none;
+    background-color: transparent;
+    border: 2px solid transparent;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
 
 /* ------------------    BOUTONS INPUT + RESET + BACK DANS LE BODY    -----------------  */
 
@@ -125,6 +153,9 @@ footer {
     color: white;
     padding-left: 10px;
     padding-top: 5px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
 
 footer a:link, footer a:visited  {

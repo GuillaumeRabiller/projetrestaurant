@@ -17,50 +17,44 @@
 
 <body class="container">
 
-<!-- ------------------------    HEADER    ---------------------------- -->
+    <!-- ------------------------    HEADER    ---------------------------- -->
 
-<div th:replace="Fragments/header :: header"></div>
+    <div th:replace="Fragments/header :: header"></div>
 
-<!--  --------------------    MAIN DE LA PAGE     -------------------  -->
+    <!--  --------------------    MAIN DE LA PAGE     -------------------  -->
 
-<div class="row">
-  <a class="btn btn-outline-secondary" th:href="@{/index}" role="button"><i class="fas fa-home"></i> Retour à l'index</a>
-</div>
+    <div class="row">
+       <a class="btn btn-outline-secondary" th:href="@{/index}" role="button"><i class="fas fa-home"></i> Retour à l'index</a>
+    </div>
 
+    <br>
+    <br>
 
-<br>
-<br>
-
-
-<h1>Liste des Commandes en cours</h1>
-<div class="row" style="width: 95% ; padding-left: 40px ">
-  <table border="1" class="table table-striped table-hover table-sm">
-    <tr>
-      <th>Table</th>
-      <th>Description</th>
-      <th>Couverts</th>
-      <th>Plats</th>
-      <th sec:authorize="hasRole('SERVEUR')">Facturer</th>
-      <th sec:authorize="hasRole('SERVEUR')">Maj</th>
-    </tr>
-    <tr th:each="note:${notes}">
-      <td th:text="${note.noTable}"></td>
-      <td th:text="${note.description}"></td>
-      <td th:text="${note.couvert}"></td>
-      <td><a th:href="@{/listePlatNote/{id}(id=${note.idNote})}"><i class="fas fa-shopping-cart"></i></a></td>
-      <td sec:authorize="hasRole('SERVEUR')"><a th:href="@{/factureNote/{id}(id=${note.idNote})}"><i class="far fa-credit-card"></i></a></td>
-      <td sec:authorize="hasRole('SERVEUR')"><a th:href="@{/updateNote/{id}(id=${note.idNote})}"><i class="far fa-edit"></i></a></td>
-    </tr>
-  </table>
-</div>
+    <h1>Liste des Commandes en cours</h1>
+    <div class="row" style="width: 95% ; padding-left: 40px ">
+        <table border="1" class="table table-striped table-hover table-sm">
+            <tr>
+                <th>Table</th>
+                <th>Description</th>
+                <th>Couverts</th>
+                <th>Plats</th>
+                <th sec:authorize="hasRole('SERVEUR')">Facturer</th>
+                <th sec:authorize="hasRole('SERVEUR')">Maj</th>
+            </tr>
+            <tr th:each="note:${notes}">
+                <td th:text="${note.noTable}"></td>
+                <td th:text="${note.description}"></td>
+                <td th:text="${note.couvert}"></td>
+                <td><a th:href="@{/listePlatNote/{id}(id=${note.idNote})}"><i class="fas fa-shopping-cart"></i></a></td>
+                <td sec:authorize="hasRole('SERVEUR')"><a th:href="@{/factureNote/{id}(id=${note.idNote})}"><i class="far fa-credit-card"></i></a></td>
+                <td sec:authorize="hasRole('SERVEUR')"><a th:href="@{/updateNote/{id}(id=${note.idNote})}"><i class="far fa-edit"></i></a></td>
+            </tr>
+        </table>
+    </div>
 
 
-
-<br>
-<br>
-
-
-
+    <br>
+    <br>
 
 
 </body>

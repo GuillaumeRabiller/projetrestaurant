@@ -17,43 +17,43 @@
 
 <body class="container">
 
-<!-- ------------------------    HEADER    ---------------------------- -->
+    <!-- ------------------------    HEADER    ---------------------------- -->
 
-<div th:replace="Fragments/header :: header"></div>
+    <div th:replace="Fragments/header :: header"></div>
 
-<!--  --------------------    MAIN DE LA PAGE     -------------------  -->
-
-
-<div class="row">
-  <a class="btn btn-outline-secondary" th:href="@{/index}" role="button"><i class="fas fa-home"></i> Retour à l'index</a>
-</div>
-
-<br>
-<br>
+    <!--  --------------------    MAIN DE LA PAGE     -------------------  -->
 
 
-<div class="row">
-  <h1>Ajout d'un Plat</h1>
-  <br>
-  <h3>Choix du Plat :</h3>
+    <div class="row">
+        <a class="btn btn-outline-secondary" th:href="@{/index}" role="button"><i class="fas fa-home"></i> Retour à l'index</a>
+    </div>
 
-  <table border="1" class="table table-striped table-hover table-sm">
-    <tr th:each="plat:${listPlat}"  style="cursor:pointer" th:some-field="${plat.id}"  onclick="rowClicked(this.getAttribute('some-field'))">
-      <td th:text="${plat.description}"></td>
-    </tr>
-  </table>
-</div>
-<br>
-<a class="backbutton" th:href="@{'/createNoteCategorie/'+ ${note}} " role="button"><i class="fas fa-undo-alt"></i> Retour au choix de Catégorie </a>
-<a class="backbutton" th:href="@{/listePlatNote/{idNote}(idNote=${note})}" role="button"><i class="fas fa-fast-backward"></i> Retour </a>
+    <br>
+    <br>
 
 
-<script th:inline="javascript">
-  function rowClicked(id) {
-    var note = [[${note}]];
-    location.href = "/saveNotePlat/" + id + "&" + note;
-  }
-</script>
+    <div class="row">
+        <h1>Ajout d'un Plat</h1>
+        <br>
+        <h3>Choix du Plat :</h3>
+
+        <table border="1" class="table table-striped table-hover table-sm">
+            <tr th:each="plat:${listPlat}"  style="cursor:pointer" th:some-field="${plat.id}"  onclick="rowClicked(this.getAttribute('some-field'))">
+               <td th:text="${plat.description}"></td>
+            </tr>
+        </table>
+    </div>
+    <br>
+    <a class="backbutton" th:href="@{'/createNoteCategorie/'+ ${note}} " role="button"><i class="fas fa-undo-alt"></i> Retour au choix de Catégorie </a>
+    <a class="backbutton" th:href="@{/listePlatNote/{idNote}(idNote=${note})}" role="button"><i class="fas fa-fast-backward"></i> Retour </a>
+
+
+    <script th:inline="javascript">
+      function rowClicked(id) {
+        var note = [[${note}]];
+        location.href = "/saveNotePlat/" + id + "&" + note;
+      }
+    </script>
 
 
 

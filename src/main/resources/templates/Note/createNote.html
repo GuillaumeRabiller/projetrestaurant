@@ -17,49 +17,47 @@
 
 <body class="container">
 
-<!-- ------------------------    HEADER    ---------------------------- -->
+    <!-- ------------------------    HEADER    ---------------------------- -->
 
-<div th:replace="Fragments/header :: header"></div>
+    <div th:replace="Fragments/header :: header"></div>
 
-<!--  --------------------    MAIN DE LA PAGE     -------------------  -->
+    <!--  --------------------    MAIN DE LA PAGE     -------------------  -->
 
+    <br>
+    <br>
 
-<br>
-<br>
-
-
-<div class="row">
-  <h1>Nouvelle commande</h1>
-  <br>
+    <div class="row">
+        <h1>Nouvelle commande</h1>
+        <br>
 
 
-  <form th:action="@{/saveNote}"
-        th:object="${aNote}" method="POST">
-    <div class="form-group">
-      <label class="form-label">Table :</label>
-      <select th:field="*{tableId}" class="form-select" th:required>
-        <option th:each="table : ${tables}"
-                th:value="${table.id}"
-                th:text="${table.noTable} + ' - ' + ${table.description}"/>
-      </select>
-      <br>
+        <form th:action="@{/saveNote}"
+              th:object="${aNote}" method="POST">
+            <div class="form-group">
+                <label class="form-label">Table :</label>
+                <select th:field="*{tableId}" class="form-select" th:required>
+                    <option th:each="table : ${tables}"
+                            th:value="${table.id}"
+                            th:text="${table.noTable} + ' - ' + ${table.description}"/>
+                </select>
+                <br>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Nombre de couverts :</label>
+                <input class="form-control" type="number" th:field="*{couvert}" />
+                <span class="error" th:if="${#fields.hasErrors('couvert')}" th:errors="*{couvert}"></span>
+                <br>
+            </div>
+
+            <input type="submit" value="Valider" />
+            <input type="reset" value="Reset" />
+            <a class="backbutton" th:href="@{/index}" role="button"><i class="fas fa-home"></i> Annuler </a>
+        </form>
+
     </div>
-    <div class="form-group">
-      <label class="form-label">Nombre de couverts :</label>
-      <input class="form-control" type="number" th:field="*{couvert}" />
-      <span class="error" th:if="${#fields.hasErrors('couvert')}" th:errors="*{couvert}"></span>
-      <br>
-    </div>
-
-    <input type="submit" value="Valider" />
-    <input type="reset" value="Reset" />
-    <a class="backbutton" th:href="@{/index}" role="button"><i class="fas fa-home"></i> Annuler </a>
-  </form>
-
-</div>
-<br>
 
 
+    <br>
 
 
 </body>

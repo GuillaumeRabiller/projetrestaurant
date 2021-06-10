@@ -17,85 +17,87 @@
 
 <body class="container">
 
-    <!-- ------------------------    HEADER    ---------------------------- -->
+    <div id="main">
 
-    <div th:replace="Fragments/header :: header"></div>
+        <!-- ------------------------    HEADER    ---------------------------- -->
 
-    <!--  --------------------    MAIN DE LA PAGE     -------------------  -->
+        <div th:replace="Fragments/header :: header"></div>
+
+        <!--  --------------------    MAIN DE LA PAGE     -------------------  -->
 
 
-    <div class="row">
-        <a class="btn btn-outline-secondary" th:href="@{/index}" role="button"><i class="fas fa-home"></i> Retour au Tableau de Bord</a>
+        <div class="row">
+            <a class="btn btn-outline-secondary" th:href="@{/index}" role="button"><i class="fas fa-home"></i> Retour au Tableau de Bord</a>
+        </div>
+
+
+        <br>
+        <br>
+
+
+        <div class="row">
+            <h1>Mise à jour d'un Utilisateur</h1>
+
+            <form th:action="@{/updateUtil}"
+                  th:object="${aUser}" method="POST">
+                <div class="form-group">
+                    <input type="hidden" th:field="*{id}" />
+                    <span class="error" th:if="${#fields.hasErrors('id')}">Erreur sur l'id</span>
+                    <br>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Nom de famille</label>
+                    <input class="form-control" type="text" th:field="*{nom}" th:required th:minlength="2" th:maxlength="30"/>
+                    <span class="error" th:if="${#fields.hasErrors('nom')}">Erreur sur le nom</span>
+                    <br>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Prénom</label>
+                    <input class="form-control" type="text" th:field="*{prenom}" th:required th:minlength="2" th:maxlength="30"/>
+                    <span class="error" th:if="${#fields.hasErrors('prenom')}" th:errors="*{prenom}"></span>
+                    <br>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">email</label>
+                    <input class="form-control" type="text" th:field="*{email}" />
+                    <span class="error" th:if="${#fields.hasErrors('email')}">Erreur sur le mail</span>
+                    <br>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">login</label>
+                    <input class="form-control" type="text"  th:field="*{login}" th:required th:minlength="6" th:maxlength="15"/>
+                    <span class="error" th:if="${#fields.hasErrors('login')}">Erreur sur le login</span>
+                    <br>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">password</label>
+                    <input class="form-control" type="text" th:field="*{password}" th:required/>
+                    <span class="error" th:if="${#fields.hasErrors('password')}">Erreur sur le mdp</span>
+                    <br>
+                </div>
+                <div class="form-group">
+                    <select th:field="*{role}" class="form-select">
+                        <option th:value="'ROLE_UTILISATEUR'">Utilisateur</option>
+                        <option th:value="'ROLE_SERVEUR'">Serveur</option>
+                        <option th:value="'ROLE_ADMIN'">Administrateur</option>
+                    </select>
+                    <br>
+                </div>
+                <input type="submit" value="Update utilisateur" />
+                <a class="backbutton" th:href="@{/readUtil}" role="button"><i class="fas fa-home"></i> Retour </a>
+            </form>
+        </div>
+
+
+        <br>
+        <br>
+
+
+        <!-- ------------------------    FOOTER    ---------------------------- -->
+
+        <div th:replace="Fragments/footer :: footer"></div>
+
     </div>
-
-
-    <br>
-    <br>
-
-
-    <div class="row">
-        <h1>Mise à jour d'un Utilisateur</h1>
-
-        <form th:action="@{/updateUtil}"
-              th:object="${aUser}" method="POST">
-            <div class="form-group">
-                <input type="hidden" th:field="*{id}" />
-                <span class="error" th:if="${#fields.hasErrors('id')}">Erreur sur l'id</span>
-                <br>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Nom de famille</label>
-                <input class="form-control" type="text" th:field="*{nom}" th:required th:minlength="2" th:maxlength="30"/>
-                <span class="error" th:if="${#fields.hasErrors('nom')}">Erreur sur le nom</span>
-                <br>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Prénom</label>
-                <input class="form-control" type="text" th:field="*{prenom}" th:required th:minlength="2" th:maxlength="30"/>
-                <span class="error" th:if="${#fields.hasErrors('prenom')}" th:errors="*{prenom}"></span>
-                <br>
-            </div>
-            <div class="form-group">
-                <label class="form-label">email</label>
-                <input class="form-control" type="text" th:field="*{email}" />
-                <span class="error" th:if="${#fields.hasErrors('email')}">Erreur sur le mail</span>
-                <br>
-            </div>
-            <div class="form-group">
-                <label class="form-label">login</label>
-                <input class="form-control" type="text"  th:field="*{login}" th:required th:minlength="6" th:maxlength="15"/>
-                <span class="error" th:if="${#fields.hasErrors('login')}">Erreur sur le login</span>
-                <br>
-            </div>
-            <div class="form-group">
-                <label class="form-label">password</label>
-                <input class="form-control" type="text" th:field="*{password}" th:required/>
-                <span class="error" th:if="${#fields.hasErrors('password')}">Erreur sur le mdp</span>
-                <br>
-            </div>
-            <div class="form-group">
-                <select th:field="*{role}" class="form-select">
-                    <option th:value="'ROLE_UTILISATEUR'">Utilisateur</option>
-                    <option th:value="'ROLE_SERVEUR'">Serveur</option>
-                    <option th:value="'ROLE_ADMIN'">Administrateur</option>
-                </select>
-                <br>
-            </div>
-            <input type="submit" value="Update utilisateur" />
-            <a class="backbutton" th:href="@{/readUtil}" role="button"><i class="fas fa-home"></i> Retour </a>
-        </form>
-    </div>
-
-
-    <br>
-    <br>
-
-
-    <!-- ------------------------    FOOTER    ---------------------------- -->
-
-    <div th:replace="Fragments/footer :: footer"></div>
-
-
 
 </body>
 </html>

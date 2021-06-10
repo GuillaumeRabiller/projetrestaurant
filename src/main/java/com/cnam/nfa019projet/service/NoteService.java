@@ -14,6 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.util.*;
 
 @Service
@@ -99,17 +102,24 @@ public class NoteService {
         facture.setIdNote(aNote.getId());
 
         //Récupération de la somme TTC, et différentes valeurs de TVA
-        float sommeTTC = 0f, sommeHT = 0f, TVA10 = 0f, TVA20 = 0f ;
+        BigDecimal sommeTTC = new BigDecimal("0");
+        BigDecimal TVA10 = new BigDecimal("0");
+        BigDecimal TVA20 = new BigDecimal("0");
         for (ListePlatFacture plat : facture.getPlats()) {
-            sommeTTC = sommeTTC + plat.getPrix();
+            BigDecimal prixPlat = new BigDecimal(Float.toString(plat.getPrix()));
+            sommeTTC = sommeTTC.add(prixPlat);
+
             if (plat.getTva() == 10) {          //plat avec TVA à 10%
-                TVA10 = TVA10 + ( plat.getPrix() * plat.getTva() / 100) ;
+                TVA10 = TVA10.add(prixPlat.multiply(BigDecimal.valueOf(plat.getTva() / 100))) ;
+                TVA10 = TVA10.setScale(2, RoundingMode.HALF_UP);
             } else {       //plat avec TVA à 20%
-                TVA20 = TVA20 + ( plat.getPrix() * plat.getTva() / 100) ;
+                TVA20 = TVA20.add(prixPlat.multiply(BigDecimal.valueOf(plat.getTva() / 100))) ;
+                TVA20 = TVA20.setScale(2, RoundingMode.HALF_UP);
             }
         }
         //on renseigne la sommeHT
-        sommeHT = sommeTTC - TVA10 - TVA20 ;
+        BigDecimal sommeHT = sommeTTC.subtract(TVA10).subtract(TVA20) ;
+        sommeHT =sommeHT.setScale(2, RoundingMode.HALF_UP);
 
         facture.setSommeTTC(sommeTTC);
         facture.setSommeHT(sommeHT);
@@ -135,6 +145,7 @@ public class NoteService {
             aPlat.setPrix(plat.getPrix()*aPlat.getQuantite());
             listePlat.add(aPlat);
         }
+
         return listePlat;
     }
 
