@@ -98,8 +98,10 @@
             <table th:each="temp:${tempList}"  border="1" class="table table-striped table-hover col">
                 <tr >
                     <td th:text="${temp.getNomFrigo()}"></td>
-                    <td th:text="${temp.getTempMatin()} != '-100.0' ? ${temp.getTempMatin()} : '-.-' "></td>
-                    <td th:text="${temp.getTempAprem()} != '-100.0' ? ${temp.getTempAprem()} : '-.-' "></td>
+                    <td th:if="${temp.tempMatinDown} or ${temp.tempMatinUp}" th:text="${temp.getTempMatin()}" th:style="${temp.tempMatinDown} ? 'background: #095DA5' : 'background: #A73000'"></td>
+                    <td th:unless="${temp.tempMatinDown}  or ${temp.tempMatinUp} " th:text="${temp.getTempMatin()} != '-100.0' ? ${temp.getTempMatin()} : '-.-' "></td>
+                    <td th:if="${temp.tempApremDown} or ${temp.tempApremUp} " th:text="${temp.getTempAprem()}" th:style="${temp.tempApremDown}  ? 'background: #095DA5' : 'background: #A73000'"></td>
+                    <td th:unless="${temp.tempApremDown} or ${temp.tempApremUp}" th:text="${temp.getTempAprem()} != '-100.0' ? ${temp.getTempAprem()}  : '-.-' "></td>
                 </tr>
             </table>
         </div>

@@ -143,6 +143,13 @@ public class FrigoController {
             historique.setHeure(releve.getDateEnregTemp().toLocalTime().truncatedTo(ChronoUnit.MINUTES));
             historique.setTemp(releve.getTemperature());
             historique.setUtilisateur(releve.getNomUtilisateur());
+            //on met à jour les boolean pour savoir si la temp dépasse ou non les seuils de temp du frigo
+            if(releve.getTemperature() < frigo.getTempMini()){
+                historique.setTempDown(true);
+            }
+            if(releve.getTemperature() > frigo.getTempMaxi()){
+                historique.setTempUp(true);
+            }
             historiqueList.add(historique) ;
         }
         historiqueList.sort((d1,d2) -> d1.getDate().compareTo(d2.getDate()));

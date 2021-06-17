@@ -51,14 +51,15 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                             "/updateProduit/**","/deleteProduit", "/createProduit",
                             "/readCategorie", "/updateCategorie/*", "/createCategorie","/deleteCategorie",
                             "/createFrigo","/updateFrigo/**","/deleteFrigo",
-                            "/readCategoriePlat", "createCategoriePlat", "updateCategoriePlat/**", "deleteCategoriePlat",
-                            "readPlat", "createPlat", "updatePlat/**", "deletePlat",
-                            "createTable", "updateTable/**", "deleteTable").hasRole("ADMIN")
+                            "/readCategoriePlat", "/createCategoriePlat", "/updateCategoriePlat/**", "deleteCategoriePlat",
+                            "/readPlat", "/createPlat", "/updatePlat/**", "/deletePlat",
+                            "/createTable", "/updateTable/**", "/deleteTable",
+                            "/readHistoriqueNote").hasRole("ADMIN")
                     .antMatchers("/indexUtil", "/createTemp").hasRole("UTILISATEUR")
-                    .antMatchers("/indexServeur", "createNote", "createNoteCategorie", "createNotePlat", "updateNote", "factureNote").hasRole("SERVEUR")
+                    .antMatchers("/indexServeur", "createNote", "/createNoteCategorie", "/createNotePlat", "/updateNote").hasRole("SERVEUR")
                     .antMatchers( "/readStock", "/readProduit",
                             "/updateStock","/chooseProduct", "/createStock", "/readFrigo", "/historiqueFrigo").hasAnyRole("ADMIN", "UTILISATEUR")
-                    .antMatchers("/readTable", "readNote","listePlatNote").hasAnyRole("SERVEUR", "ADMIN")
+                    .antMatchers("/readTable", "/readNote","/listePlatNote", "/factureNote").hasAnyRole("SERVEUR", "ADMIN")
                     .antMatchers("/", "/index", "/about").hasAnyRole("ADMIN","UTILISATEUR","SERVEUR")
                     .antMatchers( "/login", "/styles/**", "/pics/**", "/error", "/bdd/**").permitAll()
                     .anyRequest().authenticated()

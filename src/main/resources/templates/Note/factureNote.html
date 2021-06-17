@@ -105,7 +105,8 @@
     <br>
 
     <div class="row">
-        <a class="btn btn-outline-secondary" th:href="@{/factureValidNote/{id}(id=${facture.idNote})}" role="button"><i class="far fa-credit-card"></i> Facturer</a>
+        <a sec:authorize="hasRole('SERVEUR')" class="btn btn-outline-secondary" th:href="@{/factureValidNote/{id}(id=${facture.idNote})}" role="button"><i class="far fa-credit-card"></i> Facturer</a>
+        <a sec:authorize="hasRole('ADMIN')" class="btn btn-outline-secondary" th:href="@{/readHistoriqueNote}" role="button"><i class="far fa-calendar-alt"></i> Retour à l'historique</a>
     </div>
 
 

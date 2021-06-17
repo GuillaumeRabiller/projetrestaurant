@@ -49,7 +49,8 @@
                 <tr th:each="enreg : ${tempList}">
                     <td th:text="${enreg.date}"></td>
                     <td th:text="${enreg.heure}"></td>
-                    <td th:text="${enreg.temp}"></td>
+                    <td th:if="${enreg.tempDown} or ${enreg.tempUp}" th:text="${enreg.temp}" th:style="${enreg.tempDown} ? 'background: #095DA5' : 'background: #A73000'"></td>
+                    <td th:unless="${enreg.tempDown} or ${enreg.tempUp}" th:text="${enreg.temp}" ></td>
                     <td th:text="${enreg.utilisateur}"></td>
                 </tr>
             </table>

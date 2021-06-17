@@ -23,6 +23,12 @@ public class Frigo {
     @Size(min=2, max=64, message="Taille minimum de {min} et {max} au maximum")
     private String descFrigo ;
 
+    @Column(name = "TEMP_MINI")
+    private float tempMini ;
+
+    @Column(name = "TEMP_MAXI")
+    private float tempMaxi ;
+
     @OneToMany(mappedBy = "frigo")
     private List<ReleveTemp> relevesTemp;
 
@@ -51,6 +57,22 @@ public class Frigo {
 
     public void setDescFrigo(String descFrigo) {
         this.descFrigo = descFrigo;
+    }
+
+    public float getTempMini() {
+        return tempMini;
+    }
+
+    public void setTempMini(float tempMini) {
+        this.tempMini = tempMini;
+    }
+
+    public float getTempMaxi() {
+        return tempMaxi;
+    }
+
+    public void setTempMaxi(float tempMaxi) {
+        this.tempMaxi = tempMaxi;
     }
 
     public List<ReleveTemp> getRelevesTemp() {

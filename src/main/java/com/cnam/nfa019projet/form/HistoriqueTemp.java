@@ -9,6 +9,8 @@ public class HistoriqueTemp {
     private LocalTime heure ;
     private float temp ;
     private String utilisateur ;
+    private boolean tempDown = false ;
+    private boolean tempUp = false ;
 
     public HistoriqueTemp() {
     }
@@ -43,5 +45,21 @@ public class HistoriqueTemp {
 
     public void setUtilisateur(String utilisateur) {
         this.utilisateur = utilisateur;
+    }
+
+    public boolean isTempDown() {
+        return tempDown;
+    }
+
+    public void setTempDown(boolean tempDown) {
+        this.tempDown = tempDown;
+    }
+
+    public boolean isTempUp() {
+        return tempUp;
+    }
+
+    public void setTempUp(boolean tempUp) {
+        this.tempUp = tempUp;
     }
 }

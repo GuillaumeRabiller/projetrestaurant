@@ -348,4 +348,52 @@ public class NoteController {
     }
 
 
+    /**
+     * AFFICHAGE DES HISTORIQUES DE FACTURATION
+     *
+     *
+     *
+     */
+
+
+    @RequestMapping(value = {"/readHistoriqueNote"}, method = RequestMethod.GET)
+    public String readHistoriqueNote(Model model){
+        List<Note> noteList = noteRepository.findAllByReglementTrue();  //liste de toutes les notes réglées (donc en historique)
+        List<ShowFacture> factures = new ArrayList<>();
+        for (Note note: noteList) {
+            ShowFacture aFacture = new ShowFacture();
+            aFacture.setIdNote(note.getId());
+            aFacture.setDate(note.getDate().toLocalDate());
+            aFacture.setHeure(note.getDate().toLocalTime());
+            aFacture.setNoTable(note.getTable().getNoTable());
+            aFacture.setDescription(note.getTable().getDescription());
+            aFacture.setCouvert(note.getCouvert());
+            factures.add(aFacture);
+        }
+        factures.sort((d1,d2) -> d1.getDate().compareTo(d2.getDate()));
+        model.addAttribute("factures", factures);
+
+        return "/Note/readHistoriqueNote";
+    }
+
+    /**
+     * AFFICHAGE D'UNE FACTURE DEJA REGLEE
+     *
+     *
+     *
+     */
+
+    @RequestMapping(value = {"/factureHistorique/{id}"}, method = RequestMethod.GET)
+    public String factureHistorique(@PathVariable("id") long idNote, Model model){
+        Note aNote = noteRepository.findById(idNote).orElseThrow(() -> new IllegalArgumentException("Invalid note Id:" + idNote));
+        if(aNote != null){
+            FactureNote facture = noteService.historique(aNote) ;
+            model.addAttribute("facture", facture);
+            return "/Note/factureNote";
+        } else {
+            return "/error";
+        }
+    }
+
+
 }

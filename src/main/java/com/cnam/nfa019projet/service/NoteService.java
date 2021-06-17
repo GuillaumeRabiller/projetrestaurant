@@ -163,7 +163,16 @@ public class NoteService {
     }
 
 
+    //Méthode pour remplir le form FactureNote pour l'affichage d'un historique d'une facture
+    //Idem méthode 'facturer', sauf qu'ici on renseigne la date et heure lorsque ça a été facturé
 
+    public FactureNote historique(Note aNote){
+        FactureNote facture = facturer(aNote);
+        facture.setDateFacture(aNote.getDate().toLocalDate());
+        facture.setHeureFacture(aNote.getDate().toLocalTime());
+
+        return facture ;
+    }
 
 
 }
