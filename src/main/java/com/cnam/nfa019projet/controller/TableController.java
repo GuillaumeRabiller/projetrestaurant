@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import java.util.List;
 
@@ -89,7 +88,7 @@ public class TableController {
     /**
      * PAGE DE SUPPRESSION TABLE VIA ID
      *
-     * DELETE
+     * VERIFICATION
      *
      */
 
@@ -98,15 +97,18 @@ public class TableController {
         Table aTable = tableRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid table Id:" + id));
         boolean supr ;
         //Vérification si la table est allouée à certaines notes (donc suppression possible ou non)
-        if(aTable.getNotes().isEmpty()){
-            supr = true;
-        } else {
-            supr = false ;
-        }
+        supr = aTable.getNotes().isEmpty();
         model.addAttribute("aTable", aTable);
         model.addAttribute("supr", supr);
         return "/Table/deleteTable";
     }
+
+    /**
+     * PAGE DE SUPPRESSION TABLE VIA ID
+     *
+     * DELETE
+     *
+     */
 
     @GetMapping("/deleteTable/{id}")
     public String deleteTable(@PathVariable("id") long id, Model model) {

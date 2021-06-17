@@ -5,6 +5,8 @@ import java.time.LocalTime;
 
 public class HistoriqueTemp {
 
+    //VARIABLES
+
     private LocalDate date ;
     private LocalTime heure ;
     private float temp ;
@@ -12,8 +14,12 @@ public class HistoriqueTemp {
     private boolean tempDown = false ;
     private boolean tempUp = false ;
 
+    //CONSTRUCTEUR VIDE
+
     public HistoriqueTemp() {
     }
+
+    //GETTERS ET SETTERS
 
     public LocalDate getDate() {
         return date;

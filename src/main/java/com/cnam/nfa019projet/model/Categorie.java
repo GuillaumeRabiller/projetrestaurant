@@ -58,7 +58,7 @@ public class Categorie {
 
     }
 
-    //Méthodes
+    //METHODES
 
     public void deleteProduit(Produit produit) {
         produits.remove(produit);

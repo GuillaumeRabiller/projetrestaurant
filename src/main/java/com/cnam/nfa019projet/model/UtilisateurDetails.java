@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Arrays;
 import java.util.Collection;
 
+//NECESSAIRE POUR SPRING SECURITY
 
 public class UtilisateurDetails implements UserDetails {
 

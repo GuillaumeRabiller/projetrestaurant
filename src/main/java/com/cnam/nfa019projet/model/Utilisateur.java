@@ -1,10 +1,8 @@
 package com.cnam.nfa019projet.model;
 
-
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
-import java.util.List;
 
 
 @Entity

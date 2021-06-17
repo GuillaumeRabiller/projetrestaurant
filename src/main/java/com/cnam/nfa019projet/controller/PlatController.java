@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
@@ -68,9 +67,7 @@ public class PlatController {
         } else {
             //Récupération de la catégorie
             Optional<CategoriePlat> cat = categoriePlatRepository.findById(Long.valueOf(aPlat.getCategorieId()));
-            cat.ifPresent(categorie -> {
-                categorie.addPlats(aPlat);
-            });
+            cat.ifPresent(categorie -> categorie.addPlats(aPlat));
 
             platRepository.save(aPlat);
             return "redirect:readPlat";
@@ -103,7 +100,7 @@ public class PlatController {
     /**
      * PAGE DE SUPPRESSION PLAT VIA ID
      *
-     * DELETE
+     * VERIFICATION
      *
      */
 
@@ -112,15 +109,18 @@ public class PlatController {
         Plat aPlat = platRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid plat Id:" + id));
         boolean supr ;
         //Vérification si le plat est alloué à certaines notes (donc suppression possible ou non)
-        if(aPlat.getNotes().isEmpty()){
-            supr = true;
-        } else {
-            supr = false ;
-        }
+        supr = aPlat.getNotes().isEmpty();
         model.addAttribute("aPlat", aPlat);
         model.addAttribute("supr", supr);
         return "/Plat/deletePlat";
     }
+
+    /**
+     * PAGE DE SUPPRESSION PLAT VIA ID
+     *
+     * DELETE
+     *
+     */
 
     @GetMapping("/deletePlat/{id}")
     public String deletePlat(@PathVariable("id") long id, Model model) {

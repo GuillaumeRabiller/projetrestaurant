@@ -6,6 +6,8 @@ import java.time.LocalDateTime;
 @Entity
 public class ReleveTemp {
 
+    //VARIABLES
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID_TEMP")
@@ -24,10 +26,12 @@ public class ReleveTemp {
     @JoinColumn(name="ID_FRIGO")
     private Frigo frigo ;
 
+    //CONSTRUCTEUR VIDE
 
     public ReleveTemp() {
     }
 
+    //GETTERS ET SETTERS
 
     public long getId() {
         return id;

@@ -15,8 +15,10 @@ import java.util.List;
 public class CategorieController {
 
     //Creation du Repository
+
     @Autowired
     private CategorieRepository categorieRepository ;
+
 
     /**
      * LISTE DES CATEGORIES EN BASE DE DONNEE
@@ -89,7 +91,7 @@ public class CategorieController {
     /**
      * PAGE DE SUPPRESSION CATEGORIE VIA ID
      *
-     * DELETE
+     * VERIFICATION
      *
      */
 
@@ -98,15 +100,19 @@ public class CategorieController {
         Categorie aCategorie = categorieRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid categorie Id:" + id));
         boolean supr ;
         //Vérification si la catégorie est allouée à certains produits (donc suppression possible ou non)
-        if(aCategorie.getProduits().isEmpty()){
-            supr = true;
-        } else {
-            supr = false ;
-        }
+        supr = aCategorie.getProduits().isEmpty();
+
         model.addAttribute("aCategorie", aCategorie);
         model.addAttribute("supr", supr);
         return "/Categorie/deleteCategorie";
     }
+
+    /**
+     * PAGE DE SUPPRESSION CATEGORIE VIA ID
+     *
+     * DELETE
+     *
+     */
 
     @GetMapping("/deleteCategorie/{id}")
     public String deleteCategorie(@PathVariable("id") long id, Model model) {

@@ -3,6 +3,9 @@ package com.cnam.nfa019projet.form;
 import com.cnam.nfa019projet.model.RoleUtilisateur;
 
 public class UpdateUtilForm {
+
+    //VARIABLES
+
     private long id ;
     private String nom ;
     private String prenom ;
@@ -10,6 +13,8 @@ public class UpdateUtilForm {
     private String login ;
     private String password ;
     private RoleUtilisateur role ;
+
+    //CONSTRUCTEUR
 
     public UpdateUtilForm(long id, String nom, String prenom, String email, String login, String password, RoleUtilisateur role) {
         this.id = id ;
@@ -20,6 +25,8 @@ public class UpdateUtilForm {
         this.password = password;
         this.role = role;
     }
+
+    //GETTERS ET SETTERS
 
     public long getid() {
         return id;

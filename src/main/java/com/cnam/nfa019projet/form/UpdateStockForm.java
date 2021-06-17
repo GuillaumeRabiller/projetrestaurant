@@ -2,14 +2,20 @@ package com.cnam.nfa019projet.form;
 
 public class UpdateStockForm {
 
+    //VARIABLES
+
     private long id ;
     private String nomProduit ;
     private String statut ;
+
+    //CONSTRUCTEUR
 
     public UpdateStockForm(long id, String nomProduit) {
         this.id = id;
         this.nomProduit = nomProduit;
     }
+
+    //GETTERS ET SETTERS
 
     public long getId() {
         return id;

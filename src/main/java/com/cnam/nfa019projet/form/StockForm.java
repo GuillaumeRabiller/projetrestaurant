@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 
 public class StockForm {
 
+    //VARIABLES
+
     private long id ;
 
     private String nomProduit ;
@@ -18,6 +20,8 @@ public class StockForm {
 
     private int colorStatut ;
 
+    //CONSTRUCTEUR
+
     public StockForm(long id, String nomProduit, String categorie, LocalDateTime dateEntree, LocalDateTime dlc, String statut, int colorStatut) {
         this.id = id;
         this.nomProduit = nomProduit;
@@ -27,6 +31,8 @@ public class StockForm {
         this.statut = statut;
         this.colorStatut = colorStatut ;
     }
+
+    //GETTERS ET SETTERS
 
     public StockForm(){
         super();

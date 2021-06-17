@@ -1,6 +1,5 @@
 package com.cnam.nfa019projet.model;
 
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -33,10 +32,7 @@ public class Stock {
     }
 
 
-
-
     //GETTERS ET SETTERS
-
 
     public long getId() {
         return id;

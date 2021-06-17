@@ -2,10 +2,11 @@ package com.cnam.nfa019projet.form;
 
 import com.cnam.nfa019projet.model.Categorie;
 import com.cnam.nfa019projet.model.Produit;
-
 import java.util.List;
 
 public class CreateStockForm {
+
+    //VARIABLES
 
     private List<Produit> listProduit ;
 
@@ -15,9 +16,13 @@ public class CreateStockForm {
 
     private long categorieId ;
 
+    //CONSTRUCTEUR VIDE
+
     public CreateStockForm() {
         super();
     }
+
+    //GETTER ET SETTER
 
     public List<Produit> getListProduit() {
         return listProduit;

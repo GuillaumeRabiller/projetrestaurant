@@ -2,6 +2,8 @@ package com.cnam.nfa019projet.form;
 
 public class TempDuJour {
 
+    //VARIABLES
+
     private String nomFrigo ;
 
     private float tempMatin = -100.0f ;
@@ -16,8 +18,12 @@ public class TempDuJour {
 
     private boolean tempApremUp = false ;
 
+    //CONSTRUCTEUR VIDE
+
     public TempDuJour() {
     }
+
+    //GETTERS ET SETTERS
 
     public String getNomFrigo() {
         return nomFrigo;
@@ -43,9 +49,7 @@ public class TempDuJour {
         this.tempAprem = tempAprem;
     }
 
-    public boolean isTempMatinDown() {
-        return tempMatinDown;
-    }
+    public boolean isTempMatinDown() { return tempMatinDown; }
 
     public void setTempMatinDown(boolean tempMatinDown) {
         this.tempMatinDown = tempMatinDown;

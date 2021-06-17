@@ -32,8 +32,12 @@ public class Frigo {
     @OneToMany(mappedBy = "frigo")
     private List<ReleveTemp> relevesTemp;
 
+    //CONSTRUCTEUR VIDE
+
     public Frigo() {
     }
+
+    //GETTERS ET SETTERS
 
     public long getId() {
         return id;

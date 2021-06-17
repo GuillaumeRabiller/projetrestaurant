@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class IndexController {
 
+    //Instanciation des Reposittory et Service
+
     @Autowired
     private FrigoService frigoService ;
 
@@ -45,7 +47,7 @@ public class IndexController {
 
 
     /**
-     * PAGE INDEX AVEC REDIRECTION EN FONCTION DU RÔLE UTILISATEUR
+     * PAGE INDEX AVEC REDIRECTION EN FONCTION DU RÔLE
      *
      * READ
      *
@@ -53,7 +55,7 @@ public class IndexController {
      */
 
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
-    public String home(Model model) {
+    public String home() {
         String roleUtilisateur = utilisateurService.getRoleUser();
         switch (roleUtilisateur) {
             case "ROLE_ADMIN" : return "redirect:indexAdmin" ;
@@ -123,6 +125,12 @@ public class IndexController {
         return "/indexServeur";
     }
 
+
+    /**
+     * PAGE ABOUT
+     *
+     *
+     */
 
     @RequestMapping(value = {"/about"}, method = RequestMethod.GET)
     public String about() {

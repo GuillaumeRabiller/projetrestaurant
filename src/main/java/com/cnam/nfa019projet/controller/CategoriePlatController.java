@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import java.util.List;
 
@@ -15,6 +14,7 @@ import java.util.List;
 public class CategoriePlatController {
 
     //Creation du Repository
+
     @Autowired
     private CategoriePlatRepository categoriePlatRepository ;
 
@@ -89,7 +89,7 @@ public class CategoriePlatController {
     /**
      * PAGE DE SUPPRESSION CATEGORIE PLAT VIA ID
      *
-     * DELETE
+     * VERIFICATION
      *
      */
 
@@ -98,15 +98,19 @@ public class CategoriePlatController {
         CategoriePlat aCategorie = categoriePlatRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid categorie Id:" + id));
         boolean supr ;
         //Vérification si la catégorie est allouée à certains plats (donc suppression possible ou non)
-        if(aCategorie.getPlats().isEmpty()){
-            supr = true;
-        } else {
-            supr = false ;
-        }
+        supr = aCategorie.getPlats().isEmpty();
+
         model.addAttribute("aCategorie", aCategorie);
         model.addAttribute("supr", supr);
         return "/CategoriePlat/deleteCategoriePlat";
     }
+
+    /**
+     * PAGE DE SUPPRESSION CATEGORIE PLAT VIA ID
+     *
+     * DELETE
+     *
+     */
 
     @GetMapping("/deleteCategoriePlat/{id}")
     public String deleteCategoriePlat(@PathVariable("id") long id, Model model) {

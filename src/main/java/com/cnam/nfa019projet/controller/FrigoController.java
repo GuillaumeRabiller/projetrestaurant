@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Controller
@@ -94,7 +95,7 @@ public class FrigoController {
     /**
      * PAGE DE SUPPRESSION FRIGO VIA ID
      *
-     * DELETE
+     * VERIFICATION
      *
      */
 
@@ -104,15 +105,19 @@ public class FrigoController {
         Frigo aFrigo = frigoRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid frigo Id:" + id));
         //Vérif si le frigo est alloué à des températures
         boolean supr ;
-        if(aFrigo.getRelevesTemp().isEmpty()){
-            supr = true ;
-        } else {
-            supr = false ;
-        }
+        supr = aFrigo.getRelevesTemp().isEmpty();
+
         model.addAttribute("aFrigo", aFrigo);
         model.addAttribute("supr", supr);
         return "/Frigo/deleteFrigo";
     }
+
+    /**
+     * PAGE DE SUPPRESSION FRIGO VIA ID
+     *
+     * DELETE
+     *
+     */
 
     @GetMapping("/deleteFrigo/{id}")
     public String deleteFrigo(@PathVariable("id") long id, Model model) {
@@ -152,7 +157,8 @@ public class FrigoController {
             }
             historiqueList.add(historique) ;
         }
-        historiqueList.sort((d1,d2) -> d1.getDate().compareTo(d2.getDate()));
+        //on trie par date
+        historiqueList.sort(Comparator.comparing(HistoriqueTemp::getDate));
 
         model.addAttribute("tempList", historiqueList) ;
         return "/Frigo/historiqueFrigo";

@@ -1,6 +1,5 @@
 package com.cnam.nfa019projet.controller;
 
-
 import com.cnam.nfa019projet.form.DateStockForm;
 import com.cnam.nfa019projet.form.EtiquetteForm;
 import com.cnam.nfa019projet.form.UpdateStockForm;

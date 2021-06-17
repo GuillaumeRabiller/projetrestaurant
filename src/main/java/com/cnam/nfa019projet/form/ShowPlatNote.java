@@ -2,14 +2,20 @@ package com.cnam.nfa019projet.form;
 
 public class ShowPlatNote {
 
+    //VARIABLES
+
     private String nomCategorie ;
     private String description ;
     private float prix ;
     private int quantite;
     private long idPlat;
 
+    //CONSTRUCTEUR VIDE
+
     public ShowPlatNote() {
     }
+
+    //GETTERS ET SETTERS
 
     public String getNomCategorie() {
         return nomCategorie;

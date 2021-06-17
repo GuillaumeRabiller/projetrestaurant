@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 
 public class HistoriqueForm {
 
+    //VARIABLES
+
     private long idProduit ;
 
     private String nomProduit ;
@@ -16,6 +18,8 @@ public class HistoriqueForm {
 
     private String utilisateur ;
 
+    //CONSTRUCTEUR
+
     public HistoriqueForm(long idProduit, String nomProduit, String categorie, String statut, LocalDateTime dateMouvement, String utilisateur) {
         this.idProduit = idProduit;
         this.nomProduit = nomProduit;
@@ -24,6 +28,8 @@ public class HistoriqueForm {
         this.dateMouvement = dateMouvement ;
         this.utilisateur = utilisateur ;
     }
+
+    //GETTERS ET SETTERS
 
     public HistoriqueForm(){
         super();

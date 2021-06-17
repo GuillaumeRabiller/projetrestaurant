@@ -41,7 +41,6 @@ public class StockHistorique {
 
 
 
-
     //GETTERS ET SETTERS
 
 

@@ -107,7 +107,7 @@ public class ProduitController {
     /**
      * PAGE DE SUPPRESSION PRODUIT VIA ID
      *
-     * DELETE
+     * VERIFICATION
      *
      */
 
@@ -116,15 +116,18 @@ public class ProduitController {
         Produit aProduit = produitRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid produit Id:" + id));
         //Vérification si le produit est alloué à un stock
         boolean supr ;
-        if(aProduit.getStocks().isEmpty()){
-            supr = true ;
-        } else {
-            supr = false ;
-        }
+        supr = aProduit.getStocks().isEmpty();
         model.addAttribute("aProduit", aProduit) ;
         model.addAttribute("supr", supr);
         return "/Produit/deleteProduit";
     }
+
+    /**
+     * PAGE DE SUPPRESSION PRODUIT VIA ID
+     *
+     * DELETE
+     *
+     */
 
     @GetMapping("/deleteProduit/{id}")
     public String deleteProduit(@PathVariable("id") long id, Model model) {

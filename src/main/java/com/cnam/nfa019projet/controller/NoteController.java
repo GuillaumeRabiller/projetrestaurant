@@ -20,13 +20,14 @@ import javax.validation.Valid;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 
 @Controller
 public class NoteController {
 
-    //Instanciation des Repository et Services+
+    //Instanciation des Repository et Services
 
     @Autowired
     private TableRepository tableRepository ;
@@ -45,6 +46,7 @@ public class NoteController {
 
     @Autowired
     private NoteService noteService ;
+
 
     /**
      * FORMULAIRE DE SAISIE CREATION NOUVELLE NOTE
@@ -225,13 +227,9 @@ public class NoteController {
         Note note = noteRepository.findById(idNote).orElseThrow(() -> new IllegalArgumentException("Invalid note Id:" + idNote));
         List<Table> tableList = tableRepository.findAll();
         UpdateNoteForm aNote = new UpdateNoteForm(note.getId(), note.getCouvert(), tableList);
-        if(aNote != null){
-            model.addAttribute("note", aNote);
-            model.addAttribute("lastselected", note.getTable().getId());
-            return "/Note/updateNote";
-        } else {
-            return "/error";
-        }
+        model.addAttribute("note", aNote);
+        model.addAttribute("lastselected", note.getTable().getId());
+        return "/Note/updateNote";
     }
 
     @PostMapping("/updateNote")
@@ -263,12 +261,11 @@ public class NoteController {
             //on renvoie à la liste des plats de notre note
             redirectView.setContextRelative(true);
             redirectView.setUrl("/listePlatNote/"+idNote);
-            return redirectView ;
         } else {
             redirectView.setContextRelative(false);
             redirectView.setUrl("/error");
-            return redirectView;
         }
+        return redirectView ;
 
     }
 
@@ -291,12 +288,11 @@ public class NoteController {
             //on renvoie à la liste des plats de notre note
             redirectView.setContextRelative(true);
             redirectView.setUrl("/listePlatNote/"+idNote);
-            return redirectView ;
         } else {
             redirectView.setContextRelative(false);
             redirectView.setUrl("/error");
-            return redirectView;
         }
+        return redirectView ;
 
     }
 
@@ -370,7 +366,7 @@ public class NoteController {
             aFacture.setCouvert(note.getCouvert());
             factures.add(aFacture);
         }
-        factures.sort((d1,d2) -> d1.getDate().compareTo(d2.getDate()));
+        factures.sort(Comparator.comparing(ShowFacture::getDate));
         model.addAttribute("factures", factures);
 
         return "/Note/readHistoriqueNote";

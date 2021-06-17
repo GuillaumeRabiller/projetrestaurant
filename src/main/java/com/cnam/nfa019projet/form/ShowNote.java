@@ -1,19 +1,23 @@
 package com.cnam.nfa019projet.form;
 
 import com.cnam.nfa019projet.model.Plat;
-
 import java.util.List;
 
 public class ShowNote {
+
+    //VARIABLES
 
     private long idNote;
     private int noTable ;
     private String description ;
     private int couvert ;
 
+    //CONSTRUCTEUR VIDE
 
     public ShowNote() {
     }
+
+    //GETTERS ET SETTERS
 
     public long getIdNote() {
         return idNote;

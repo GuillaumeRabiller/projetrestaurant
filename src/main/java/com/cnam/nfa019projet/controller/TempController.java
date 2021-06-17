@@ -1,6 +1,5 @@
 package com.cnam.nfa019projet.controller;
 
-
 import com.cnam.nfa019projet.model.Frigo;
 import com.cnam.nfa019projet.model.ReleveTemp;
 import com.cnam.nfa019projet.repository.FrigoRepository;
@@ -19,6 +18,8 @@ import java.util.Optional;
 
 @Controller
 public class TempController {
+
+    //Instanciation des Repository et Services
 
     @Autowired
     FrigoRepository frigoRepository ;
@@ -54,9 +55,7 @@ public class TempController {
             ReleveTemp temp = new ReleveTemp();
             temp.setDateEnregTemp(LocalDateTime.now());
             Optional<Frigo> frigo = frigoRepository.findById(aTemp.getFrigoId());
-            frigo.ifPresent(fridge -> {
-                fridge.addReleveTemp(temp);
-            });
+            frigo.ifPresent(fridge -> fridge.addReleveTemp(temp));
             temp.setTemperature(aTemp.getTemperature());
             temp.setNomUtilisateur(userService.getNomUser());
 

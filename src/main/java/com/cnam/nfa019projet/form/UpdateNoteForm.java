@@ -1,7 +1,6 @@
 package com.cnam.nfa019projet.form;
 
 import com.cnam.nfa019projet.model.Table;
-
 import java.util.List;
 
 public class UpdateNoteForm {

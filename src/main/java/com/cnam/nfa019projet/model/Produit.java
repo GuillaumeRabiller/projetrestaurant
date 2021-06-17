@@ -42,7 +42,7 @@ public class Produit {
     private List<Stock> stocks ;
 
 
-    //CONSTRUCTEURS
+    //CONSTRUCTEUR VIDE
 
     public Produit() {
     }

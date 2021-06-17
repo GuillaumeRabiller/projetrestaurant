@@ -5,6 +5,8 @@ import java.time.LocalTime;
 
 public class ShowFacture {
 
+    //VARIABLES
+
     public long idNote ;
     public LocalDate date ;
     public LocalTime heure ;
@@ -12,8 +14,12 @@ public class ShowFacture {
     public String description ;
     public int couvert ;
 
+    //CONSTRUCTEUR VIDE
+
     public ShowFacture() {
     }
+
+    //GETTERS ET SETTERS
 
     public long getIdNote() {
         return idNote;

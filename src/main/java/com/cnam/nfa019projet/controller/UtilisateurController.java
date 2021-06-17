@@ -20,7 +20,7 @@ import java.util.List;
 public class UtilisateurController {
 
 
-    //Création de l'utilisateur Repository
+    //Création des Repository
 
     @Autowired
     private UtilisateurRepository utilisateurRepository;

@@ -6,14 +6,20 @@ import java.util.List;
 
 public class CreateTemp {
 
+    //VARIABLES
+
     private List<Frigo> frigoList ;
 
     private long frigoId ;
 
     private float temperature ;
 
+    //CONSTRUCTEUR VIDE
+
     public CreateTemp() {
     }
+
+    //GETTERS ET SETTERS
 
     public List<Frigo> getFrigoList() {
         return frigoList;
